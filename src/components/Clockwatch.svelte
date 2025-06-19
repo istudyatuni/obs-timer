@@ -1,5 +1,6 @@
 <script module>
   import { get } from "svelte/store";
+
   import { start_clockwatch } from "../lib/clockwatch";
   import {
     CLOCK_POSITION_NAMES,
@@ -28,8 +29,14 @@
   function handle_set_position(pos) {
     STATE.set("clock_position", pos);
   }
-  function toggle_settings() {
+  function toggle_settings(e) {
     show_settings = !show_settings;
+  }
+  function handle_font_size_reset(e) {
+    if (e.which === 2) {
+      // middle mouse button pressed
+      STATE.set("clockwatch_font_size_em", 1);
+    }
   }
   function handle_reset() {
     STATE.set("clockwatch", DEFAULT_STORAGE.clockwatch);
@@ -59,7 +66,9 @@
   class="clockwatch"
   class:position_bottom
   class:position_right
-  onclick={toggle_settings}>
+  style="font-size: {$STATE.clockwatch_font_size_em}em;"
+  onclick={toggle_settings}
+  onmousedown={handle_font_size_reset}>
   {$STATE.clockwatch}
 </div>
 
@@ -81,6 +90,17 @@
       <input type="time" bind:value={$STATE.clockwatch} />
     </label>
   </div>
+  <div class="pad">
+    <label>
+      Font size:
+      <input
+        type="number"
+        bind:value={$STATE.clockwatch_font_size_em}
+        min="1"
+        max="20"
+        step="0.1" />
+    </label>
+  </div>
   <div>
     <p>Position:</p>
     {@render position_button("top_left")}
@@ -89,18 +109,23 @@
     {@render position_button("bottom_left", "pad")}
     {@render position_button("bottom_right")}
   </div>
+  {#if $STATE.clockwatch_font_size_em !== 1}
+    <p>Click with middle mouse button on clockwatch to reset font size</p>
+  {/if}
 </div>
 
 <style>
   .clockwatch {
     position: absolute;
     font-family: "Fira Code", monospace;
-    padding: 1em;
     cursor: pointer;
   }
   .settings {
+    background-color: rgba(1, 1, 1, 0.1);
+    width: 15em;
+    border-radius: 1em;
     padding: 1em;
-    padding-top: 3em;
+    margin: auto;
   }
   .position_right {
     right: 0;
