@@ -35,6 +35,20 @@
     class={classes}>{CLOCK_POSITION_NAMES[position_key]}</button>
 {/snippet}
 
+{#snippet padding_input(name, key)}
+  <div class="pad">
+    <label>
+      {name}:
+      <input
+        type="number"
+        bind:value={$STATE[key]}
+        min="0"
+        max="20"
+        step="0.1" />
+    </label>
+  </div>
+{/snippet}
+
 <div class="settings-wrapper">
   <div class:hidden={$SETTINGS_HIDDEN} class="settings">
     <div>
@@ -72,6 +86,13 @@
       <br />
       {@render position_button("bottom_left", "pad")}
       {@render position_button("bottom_right")}
+    </div>
+    <div>
+      <p>Padding:</p>
+      {@render padding_input("Top", "clockwatch_top_padding_em")}
+      {@render padding_input("Bottom", "clockwatch_bottom_padding_em")}
+      {@render padding_input("Left", "clockwatch_left_padding_em")}
+      {@render padding_input("Right", "clockwatch_right_padding_em")}
     </div>
     {#if $STATE.clockwatch_font_size_em !== 1}
       <p>Click with middle mouse button on clockwatch to reset font size</p>

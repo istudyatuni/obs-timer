@@ -32,7 +32,14 @@
   class="clockwatch"
   class:position_bottom
   class:position_right
-  style="font-size: {$STATE.clockwatch_font_size_em}em;"
+  style="
+    font-size: {$STATE.clockwatch_font_size_em}em;
+    margin:
+      {$STATE.clockwatch_top_padding_em}em
+      {$STATE.clockwatch_right_padding_em}em
+      {$STATE.clockwatch_bottom_padding_em}em
+      {$STATE.clockwatch_left_padding_em}em;
+  "
   onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}
   onmousedown={handle_font_size_reset}>
   {$STATE.clockwatch}
@@ -43,7 +50,6 @@
     position: absolute;
     font-family: "Fira Code", monospace;
     cursor: pointer;
-    margin: 1em;
   }
   .position_right {
     right: 0;

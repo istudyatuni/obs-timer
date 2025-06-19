@@ -5,11 +5,17 @@ import { localStore } from "svelte-storages";
 import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
 
 export const DEFAULT_STORAGE = {
-	version: 1,
+	version: 2,
 	clockwatch: "00:00:00",
 	clockwatch_status: CLOCKWATCH_STATUSES.run,
 	clock_position: CLOCK_POSITIONS.top_left,
+
+	// sizes and paddings
 	clockwatch_font_size_em: 1,
+	clockwatch_left_padding_em: 1,
+	clockwatch_right_padding_em: 1,
+	clockwatch_top_padding_em: 1,
+	clockwatch_bottom_padding_em: 1,
 };
 
 export const STATE = localStore("timer-data", DEFAULT_STORAGE);
