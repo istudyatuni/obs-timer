@@ -7,7 +7,7 @@ import { CLOCKWATCH_STATUSES } from "./constants";
  * @param {string} time
  * @returns number[]
  */
-function parse_time_hms(time) {
+export function parse_time_hms(time) {
 	return time.split(":").map((e) => parseInt(e));
 }
 
@@ -15,8 +15,20 @@ function parse_time_hms(time) {
  * @param {any[]} parts
  * @returns String.
  */
-function format_hms(parts) {
+export function format_hms(parts) {
 	return parts.map((p) => p.toString().padStart(2, "0")).join(":");
+}
+
+export function recalculate_hms([h, m, s]) {
+	let newMinutes = Math.floor(s / 60);
+	m += newMinutes;
+	s -= 60 * newMinutes;
+
+	let newHours = Math.floor(m / 60);
+	h += newHours;
+	m -= 60 * newHours;
+
+	return [h, m, s];
 }
 
 export function start_clockwatch() {
@@ -26,17 +38,9 @@ export function start_clockwatch() {
 		}
 
 		let [hour, minute, second] = parse_time_hms(get(STATE).clockwatch);
-
-		second += 1;
-
-		let newMinutes = Math.floor(second / 60);
-		minute += newMinutes;
-		second -= 60 * newMinutes;
-
-		let newHours = Math.floor(minute / 60);
-		hour += newHours;
-		minute -= 60 * newHours;
-
-		STATE.set("clockwatch", format_hms([hour, minute, second]));
+		STATE.set(
+			"clockwatch",
+			format_hms(recalculate_hms([hour, minute, second + 1])),
+		);
 	}, 1000);
 }

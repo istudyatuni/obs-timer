@@ -7,9 +7,16 @@
     CLOCKWATCH_STATUSES,
   } from "../lib/constants";
   import { DEFAULT_STORAGE, SETTINGS_HIDDEN, STATE } from "../lib/stores";
+  import {
+    format_hms,
+    parse_time_hms,
+    recalculate_hms,
+  } from "../lib/clockwatch";
 </script>
 
 <script>
+  let hms = $derived(parse_time_hms($STATE.clockwatch));
+
   function handle_set_position(pos) {
     STATE.set("clock_position", pos);
   }
@@ -26,6 +33,22 @@
       throw "unhandled clockwatch_status";
     }
     STATE.set("clockwatch_status", status);
+  }
+
+  function make_handler_onchange_hms(component) {
+    return (e) => {
+      let index = 0;
+      let value = parseInt(e.target.value);
+      if (component === "hour") {
+        index = 0;
+      } else if (component === "minute") {
+        index = 1;
+      } else if (component === "second") {
+        index = 2;
+      }
+      hms[index] = value;
+      STATE.set("clockwatch", format_hms(recalculate_hms(hms)));
+    };
   }
 </script>
 
@@ -62,10 +85,21 @@
       <button onclick={handle_reset}>Reset</button>
     </div>
     <div class="pad">
-      <!-- todo: fix when hours >= 24 -->
-      <label>
+      <label class="time-input">
         Set time:
-        <input type="time" bind:value={$STATE.clockwatch} />
+        <input
+          type="number"
+          value={hms[0]}
+          class="hour"
+          oninput={make_handler_onchange_hms("hour")} />
+        <input
+          type="number"
+          value={hms[1]}
+          oninput={make_handler_onchange_hms("minute")} />
+        <input
+          type="number"
+          value={hms[2]}
+          oninput={make_handler_onchange_hms("second")} />
       </label>
     </div>
     <div class="pad">
@@ -101,6 +135,12 @@
 </div>
 
 <style>
+  .time-input > input.hour {
+    width: 4em;
+  }
+  .time-input > input {
+    width: 3em;
+  }
   .settings-wrapper {
     position: absolute;
     width: 100%;
