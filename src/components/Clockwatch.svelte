@@ -1,6 +1,11 @@
 <script module>
+  import { get } from "svelte/store";
   import { start_clockwatch } from "../lib/clockwatch";
-  import { CLOCK_POSITION_NAMES, CLOCK_POSITIONS } from "../lib/constants";
+  import {
+    CLOCK_POSITION_NAMES,
+    CLOCK_POSITIONS,
+    CLOCKWATCH_STATUSES,
+  } from "../lib/constants";
   import { DEFAULT_STORAGE, STATE } from "../lib/stores";
 </script>
 
@@ -27,7 +32,18 @@
     show_settings = !show_settings;
   }
   function handle_reset() {
-    STATE.set('clockwatch', DEFAULT_STORAGE.clockwatch)
+    STATE.set("clockwatch", DEFAULT_STORAGE.clockwatch);
+  }
+  function handle_play_pause() {
+    let status = get(STATE).clockwatch_status;
+    if (status === CLOCKWATCH_STATUSES.run) {
+      status = CLOCKWATCH_STATUSES.pause;
+    } else if (status === CLOCKWATCH_STATUSES.pause) {
+      status = CLOCKWATCH_STATUSES.run;
+    } else {
+      throw "unhandled clockwatch_status";
+    }
+    STATE.set("clockwatch_status", status);
   }
 </script>
 
@@ -49,7 +65,13 @@
 
 <div class:hidden={!show_settings} class="settings">
   <div>
-    <button>Play/pause</button>
+    <button onclick={handle_play_pause}>
+      {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
+        Pause
+      {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
+        Play
+      {/if}
+    </button>
     <button onclick={handle_reset}>Reset</button>
   </div>
   <div class="pad">

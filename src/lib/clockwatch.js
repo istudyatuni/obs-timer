@@ -1,5 +1,7 @@
 import { get } from "svelte/store";
+
 import { STATE } from "./stores";
+import { CLOCKWATCH_STATUSES } from "./constants";
 
 /**
  * @param {string} time
@@ -19,6 +21,10 @@ function format_hms(parts) {
 
 export function start_clockwatch() {
 	setInterval(() => {
+		if (get(STATE).clockwatch_status === CLOCKWATCH_STATUSES.pause) {
+			return;
+		}
+
 		let [hour, minute, second] = parse_time_hms(get(STATE).clockwatch);
 
 		second += 1;
