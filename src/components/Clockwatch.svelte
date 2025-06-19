@@ -1,7 +1,7 @@
 <script module>
   import { start_clockwatch } from "../lib/clockwatch";
   import { CLOCK_POSITION_NAMES, CLOCK_POSITIONS } from "../lib/constants";
-  import { STATE } from "../lib/stores";
+  import { DEFAULT_STORAGE, STATE } from "../lib/stores";
 </script>
 
 <script>
@@ -26,6 +26,9 @@
   function toggle_settings() {
     show_settings = !show_settings;
   }
+  function handle_reset() {
+    STATE.set('clockwatch', DEFAULT_STORAGE.clockwatch)
+  }
 </script>
 
 {#snippet position_button(position_key, _class = "")}
@@ -47,7 +50,7 @@
 <div class:hidden={!show_settings} class="settings">
   <div>
     <button>Play/pause</button>
-    <button>Reset</button>
+    <button onclick={handle_reset}>Reset</button>
   </div>
   <div class="pad">
     <!-- todo: fix when hours >= 24 -->
