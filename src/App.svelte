@@ -8,12 +8,4 @@
   migrate_storage();
 </script>
 
-<main>
-  <Clockwatch />
-</main>
-
-<style>
-  main {
-    padding: 1em;
-  }
-</style>
+<Clockwatch />

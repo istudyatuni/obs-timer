@@ -72,46 +72,48 @@
   {$STATE.clockwatch}
 </div>
 
-<div class:hidden={!show_settings} class="settings">
-  <div>
-    <button onclick={handle_play_pause}>
-      {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
-        Pause
-      {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
-        Play
-      {/if}
-    </button>
-    <button onclick={handle_reset}>Reset</button>
+<div class="settings-wrapper">
+  <div class:hidden={!show_settings} class="settings">
+    <div>
+      <button onclick={handle_play_pause}>
+        {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
+          Pause
+        {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
+          Play
+        {/if}
+      </button>
+      <button onclick={handle_reset}>Reset</button>
+    </div>
+    <div class="pad">
+      <!-- todo: fix when hours >= 24 -->
+      <label>
+        Set time:
+        <input type="time" bind:value={$STATE.clockwatch} />
+      </label>
+    </div>
+    <div class="pad">
+      <label>
+        Font size:
+        <input
+          type="number"
+          bind:value={$STATE.clockwatch_font_size_em}
+          min="1"
+          max="20"
+          step="0.1" />
+      </label>
+    </div>
+    <div>
+      <p>Position:</p>
+      {@render position_button("top_left")}
+      {@render position_button("top_right")}
+      <br />
+      {@render position_button("bottom_left", "pad")}
+      {@render position_button("bottom_right")}
+    </div>
+    {#if $STATE.clockwatch_font_size_em !== 1}
+      <p>Click with middle mouse button on clockwatch to reset font size</p>
+    {/if}
   </div>
-  <div class="pad">
-    <!-- todo: fix when hours >= 24 -->
-    <label>
-      Set time:
-      <input type="time" bind:value={$STATE.clockwatch} />
-    </label>
-  </div>
-  <div class="pad">
-    <label>
-      Font size:
-      <input
-        type="number"
-        bind:value={$STATE.clockwatch_font_size_em}
-        min="1"
-        max="20"
-        step="0.1" />
-    </label>
-  </div>
-  <div>
-    <p>Position:</p>
-    {@render position_button("top_left")}
-    {@render position_button("top_right")}
-    <br />
-    {@render position_button("bottom_left", "pad")}
-    {@render position_button("bottom_right")}
-  </div>
-  {#if $STATE.clockwatch_font_size_em !== 1}
-    <p>Click with middle mouse button on clockwatch to reset font size</p>
-  {/if}
 </div>
 
 <style>
@@ -119,6 +121,11 @@
     position: absolute;
     font-family: "Fira Code", monospace;
     cursor: pointer;
+    margin: 1em;
+  }
+  .settings-wrapper {
+    position: absolute;
+    width: 100%;
   }
   .settings {
     background-color: rgba(1, 1, 1, 0.1);
@@ -126,6 +133,7 @@
     border-radius: 1em;
     padding: 1em;
     margin: auto;
+    margin-top: 1em;
   }
   .position_right {
     right: 0;
