@@ -1,4 +1,7 @@
-<script>
+<script module>
+  import Clockwatch from "./components/Clockwatch.svelte";
 </script>
 
-<main></main>
+<main>
+  <Clockwatch />
+</main>
