@@ -1,4 +1,4 @@
-import { get } from "svelte/store";
+import { get, writable } from "svelte/store";
 
 import { localStore } from "svelte-storages";
 
@@ -13,6 +13,8 @@ export const DEFAULT_STORAGE = {
 };
 
 export const STATE = localStore("timer-data", DEFAULT_STORAGE);
+
+export const SETTINGS_HIDDEN = writable(true);
 
 export function migrate_storage() {
 	function migrate(store, default_kv) {
