@@ -146,7 +146,7 @@
     </div>
     <p class="current-timer">
       Current timer:
-      {#if window.location.hash !== ''}
+      {#if window.location.hash !== ""}
         {window.location.hash}
       {:else}
         default
