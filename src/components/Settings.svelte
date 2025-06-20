@@ -26,7 +26,7 @@
   function handle_set_position(pos) {
     STATE.set("clock_position", pos);
   }
-  function handle_reset() {
+  function handle_reset_time() {
     STATE.set("clockwatch_seconds", DEFAULT_STORAGE.clockwatch_seconds);
   }
   function handle_play_pause() {
@@ -63,10 +63,10 @@
   }
 </script>
 
-{#snippet position_button(position_key, classes = "")}
+{#snippet position_button(position_key)}
   <button
     onclick={() => handle_set_position(CLOCK_POSITIONS[position_key])}
-    class={classes}>{CLOCK_POSITION_NAMES[position_key]}</button>
+    class="pad">{CLOCK_POSITION_NAMES[position_key]}</button>
 {/snippet}
 
 {#snippet padding_input(key)}
@@ -93,7 +93,6 @@
           Play
         {/if}
       </button>
-      <button onclick={handle_reset}>Reset</button>
     </div>
     <div class="pad">
       <label class="pointer">
@@ -130,6 +129,7 @@
           onwheel={() => {}}
           oninput={make_handler_onchange_hms("second")} />
       </label>
+      <button class="pad" onclick={handle_reset_time}>Reset time</button>
     </div>
     <div class="pad">
       <label>
@@ -144,15 +144,15 @@
       </label>
     </div>
     <div>
-      <p>Position:</p>
+      <p class="unpad">Position:</p>
       {@render position_button("top_left")}
       {@render position_button("top_right")}
       <br />
-      {@render position_button("bottom_left", "pad")}
+      {@render position_button("bottom_left")}
       {@render position_button("bottom_right")}
     </div>
     <div>
-      <p>Indent:</p>
+      <p class="unpad">Indent:</p>
       <div class="indent-input-container">
         {@render padding_input("clockwatch_top_padding_em")}
         {@render padding_input("clockwatch_left_padding_em")}
@@ -193,6 +193,9 @@
     padding: 1em;
     margin: auto;
     margin-top: 1em;
+  }
+  p.unpad {
+    margin-bottom: -0.3em;
   }
   .indent-input-container {
     display: grid;
