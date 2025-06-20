@@ -202,14 +202,18 @@
   .settings-wrapper {
     position: absolute;
     width: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+  .settings-wrapper::-webkit-scrollbar {
+    scrollbar-width: none;
   }
   .settings {
     background-color: rgba(1, 1, 1, 0.1);
     width: 15em;
     border-radius: 1em;
     padding: 1em;
-    margin: auto;
-    margin-top: 1em;
+    margin: 1em auto;
   }
   p.unpad {
     margin-bottom: -0.3em;
