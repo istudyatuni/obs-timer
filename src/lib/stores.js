@@ -2,7 +2,7 @@ import { get, writable } from "svelte/store";
 
 import { localStore } from "svelte-storages";
 
-import { join_time_hms, parse_time_hms } from "./clockwatch";
+import { join_time_hms } from "./clockwatch";
 import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
 import { LOCAL_STATE_KEY } from "./hashes";
 
@@ -70,4 +70,9 @@ function migrate_clockwatch_to_seconds() {
 			join_time_hms(parse_time_hms(get(STATE).clockwatch)),
 		);
 	}
+}
+
+// only used for migration
+function parse_time_hms(time) {
+	return time.split(":").map((e) => parseInt(e));
 }

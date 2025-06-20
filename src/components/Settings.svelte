@@ -14,7 +14,6 @@
     STATE,
   } from "../lib/stores";
   import {
-    format_hms,
     split_time_hms,
     recalculate_hms,
     join_time_hms,
