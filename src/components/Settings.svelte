@@ -102,8 +102,9 @@
         Set time:
         <input
           type="number"
-          value={hms[0]}
           class="hour"
+          value={hms[0]}
+          min="0"
           oninput={make_handler_onchange_hms("hour")} />
         <input
           type="number"
