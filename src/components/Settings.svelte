@@ -73,7 +73,13 @@
   <!-- extra div for grid -->
   <div></div>
   <div class="pad">
-    <input type="number" bind:value={$STATE[key]} min="0" max="20" step="0.1" />
+    <input
+      type="number"
+      bind:value={$STATE[key]}
+      onwheel={() => {}}
+      min="0"
+      max="20"
+      step="0.1" />
   </div>
 {/snippet}
 
@@ -105,14 +111,17 @@
           class="hour"
           value={hms[0]}
           min="0"
+          onwheel={() => {}}
           oninput={make_handler_onchange_hms("hour")} />
         <input
           type="number"
           value={hms[1]}
+          onwheel={() => {}}
           oninput={make_handler_onchange_hms("minute")} />
         <input
           type="number"
           value={hms[2]}
+          onwheel={() => {}}
           oninput={make_handler_onchange_hms("second")} />
       </label>
     </div>
@@ -122,6 +131,7 @@
         <input
           type="number"
           bind:value={$STATE.clockwatch_font_size_em}
+          onwheel={() => {}}
           min="1"
           max="20"
           step="0.1" />
