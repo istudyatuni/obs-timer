@@ -14,7 +14,7 @@ export function parse_time_hms(time) {
 }
 
 /**
- * @param {any[]} parts
+ * @param {number[]} parts
  * @returns String.
  */
 export function format_hms(parts) {
