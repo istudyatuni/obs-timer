@@ -61,6 +61,16 @@
       STATE.set("clockwatch_seconds", join_time_hms(recalculate_hms(hms)));
     };
   }
+
+  function should_set_min_hms_input(component) {
+    if (component === "hour") {
+      return true;
+    } else if (component === "minute") {
+      return hms[0] === 0;
+    } else if (component === "second") {
+      return hms[0] === 0 && hms[1] === 0;
+    }
+  }
 </script>
 
 {#snippet position_button(position_key)}
@@ -88,7 +98,7 @@
     type="number"
     class:hour={component === "hour"}
     {value}
-    min={component === "hour" ? "0" : null}
+    min={should_set_min_hms_input(component) ? "0" : null}
     onwheel={() => {}}
     oninput={make_handler_onchange_hms(component)} />
 {/snippet}
