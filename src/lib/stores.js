@@ -2,14 +2,15 @@ import { get, writable } from "svelte/store";
 
 import { localStore } from "svelte-storages";
 
+import { join_time_hms, parse_time_hms } from "./clockwatch";
 import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
 import { LOCAL_STATE_KEY } from "./hashes";
 
 export const DEFAULT_STORAGE = {
-	version: 3,
+	version: 4,
 
 	// clockwatch
-	clockwatch: "00:00:00",
+	clockwatch_seconds: 0,
 	clockwatch_status: CLOCKWATCH_STATUSES.run,
 	clock_position: CLOCK_POSITIONS.top_left,
 	clockwatch_last_time: 0,
@@ -21,6 +22,9 @@ export const DEFAULT_STORAGE = {
 	clockwatch_right_padding_em: 1,
 	clockwatch_top_padding_em: 1,
 	clockwatch_bottom_padding_em: 1,
+
+	// deleted
+	// clockwatch
 };
 
 export const PADDING_STORAGE_KEYS = Object.keys(DEFAULT_STORAGE).filter((k) =>
@@ -48,5 +52,22 @@ export function migrate_storage() {
 		}
 	}
 
+	migrate_clockwatch_to_seconds();
+
 	migrate(STATE, DEFAULT_STORAGE);
+}
+
+function migrate_clockwatch_to_seconds() {
+	let state = get(STATE);
+	if (
+		state.version < 4 &&
+		DEFAULT_STORAGE.version >= 4 &&
+		state.clockwatch_seconds === undefined &&
+		state.clockwatch !== "00:00:00"
+	) {
+		STATE.set(
+			"clockwatch_seconds",
+			join_time_hms(parse_time_hms(get(STATE).clockwatch)),
+		);
+	}
 }

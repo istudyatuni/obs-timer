@@ -1,5 +1,9 @@
 <script module>
-  import { start_clockwatch } from "../lib/clockwatch";
+  import {
+    format_hms,
+    split_time_hms,
+    start_clockwatch,
+  } from "../lib/clockwatch";
   import { CLOCK_POSITIONS } from "../lib/constants";
   import { SETTINGS_HIDDEN, STATE } from "../lib/stores";
 </script>
@@ -42,7 +46,7 @@
   "
   onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}
   onmousedown={handle_font_size_reset}>
-  {$STATE.clockwatch}
+  {format_hms(split_time_hms($STATE.clockwatch_seconds))}
 </div>
 
 <style>

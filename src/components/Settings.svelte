@@ -15,19 +15,20 @@
   } from "../lib/stores";
   import {
     format_hms,
-    parse_time_hms,
+    split_time_hms,
     recalculate_hms,
+    join_time_hms,
   } from "../lib/clockwatch";
 </script>
 
 <script>
-  let hms = $derived(parse_time_hms($STATE.clockwatch));
+  let hms = $derived(split_time_hms($STATE.clockwatch_seconds));
 
   function handle_set_position(pos) {
     STATE.set("clock_position", pos);
   }
   function handle_reset() {
-    STATE.set("clockwatch", DEFAULT_STORAGE.clockwatch);
+    STATE.set("clockwatch_seconds", DEFAULT_STORAGE.clockwatch_seconds);
   }
   function handle_play_pause() {
     let status = get(STATE).clockwatch_status;
@@ -58,7 +59,7 @@
         index = 2;
       }
       hms[index] = value;
-      STATE.set("clockwatch", format_hms(recalculate_hms(hms)));
+      STATE.set("clockwatch_seconds", join_time_hms(recalculate_hms(hms)));
     };
   }
 </script>
