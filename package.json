@@ -12,6 +12,7 @@
   "devDependencies": {
     "@homer0/prettier-plugin-jsdoc": "^10.0.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@types/obs-studio": "^2.17.2",
     "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.4.0",
     "svelte": "^5.28.1",

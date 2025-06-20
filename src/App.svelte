@@ -9,5 +9,13 @@
   migrate_storage();
 </script>
 
-<Clockwatch />
-<Settings />
+<main class:obs={window.obsstudio !== undefined}>
+  <Settings />
+  <Clockwatch />
+</main>
+
+<style>
+  .obs {
+    color: white;
+  }
+</style>

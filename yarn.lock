@@ -304,6 +304,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.8.tgz#958b91c991b1867ced318bedea0e215ee050726e"
   integrity sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==
 
+"@types/obs-studio@^2.17.2":
+  version "2.17.2"
+  resolved "https://registry.yarnpkg.com/@types/obs-studio/-/obs-studio-2.17.2.tgz#70874b63105e77adc725e0be73f7f5a41f4b4f62"
+  integrity sha512-DH9lSHcXKTtYSOFRIbZLmCTDQwtCZbVrTHpInzGp5y/Yb0lUarjw2d3wEK0zox8oevOHlXMx+ig20l2xVTCZwg==
+
 acorn@^8.12.1:
   version "8.15.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.15.0.tgz#a360898bc415edaac46c8241f6383975b930b816"
