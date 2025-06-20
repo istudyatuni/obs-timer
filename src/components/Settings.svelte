@@ -83,6 +83,16 @@
   </div>
 {/snippet}
 
+{#snippet time_input(component, value)}
+  <input
+    type="number"
+    class:hour={component === "hour"}
+    {value}
+    min={component === "hour" ? "0" : null}
+    onwheel={() => {}}
+    oninput={make_handler_onchange_hms(component)} />
+{/snippet}
+
 <div class="settings-wrapper">
   <div
     class:hidden={$SETTINGS_HIDDEN ||
@@ -114,23 +124,9 @@
     <div class="pad">
       <label class="time-input">
         Set time:
-        <input
-          type="number"
-          class="hour"
-          value={hms[0]}
-          min="0"
-          onwheel={() => {}}
-          oninput={make_handler_onchange_hms("hour")} />
-        <input
-          type="number"
-          value={hms[1]}
-          onwheel={() => {}}
-          oninput={make_handler_onchange_hms("minute")} />
-        <input
-          type="number"
-          value={hms[2]}
-          onwheel={() => {}}
-          oninput={make_handler_onchange_hms("second")} />
+        {@render time_input("hour", hms[0])}
+        {@render time_input("minute", hms[1])}
+        {@render time_input("second", hms[2])}
       </label>
       <button class="pad" onclick={handle_reset_time}>Reset time</button>
     </div>
