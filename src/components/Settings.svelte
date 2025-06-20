@@ -78,7 +78,7 @@
 
 <div class="settings-wrapper">
   <div class:hidden={$SETTINGS_HIDDEN} class="settings">
-    <div>
+    <div class="center">
       <button onclick={handle_play_pause}>
         {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
           Pause
@@ -171,10 +171,13 @@
   .indent-input-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
   }
   .indent-input-container > div {
     width: auto;
+  }
+  .center {
+    margin: auto;
+    width: fit-content;
   }
   .pad {
     margin-top: 5px;
