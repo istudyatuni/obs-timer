@@ -12,7 +12,7 @@
   const enter = () => MOUSE_IN_WINDOW.set(true);
 </script>
 
-<svelte:window onblur={leave} />
+<svelte:window onblur={leave} onfocus={enter} />
 <svelte:body onmouseleave={leave} onmouseenter={enter} />
 
 <main class:obs={window.obsstudio !== undefined}>
