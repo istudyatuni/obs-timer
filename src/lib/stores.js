@@ -3,6 +3,7 @@ import { get, writable } from "svelte/store";
 import { localStore } from "svelte-storages";
 
 import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
+import { LOCAL_STATE_KEY } from "./hashes";
 
 export const DEFAULT_STORAGE = {
 	version: 3,
@@ -26,7 +27,7 @@ export const PADDING_STORAGE_KEYS = Object.keys(DEFAULT_STORAGE).filter((k) =>
 	k.endsWith("padding_em"),
 );
 
-export const STATE = localStore("timer-data", DEFAULT_STORAGE);
+export const STATE = localStore(LOCAL_STATE_KEY, DEFAULT_STORAGE);
 
 export const SETTINGS_HIDDEN = writable(true);
 

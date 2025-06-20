@@ -143,6 +143,14 @@
       </div>
       <button class="pad" onclick={handle_reset_paddings}>Reset</button>
     </div>
+    <p class="current-timer">
+      Current timer:
+      {#if window.location.hash !== ''}
+        {window.location.hash}
+      {:else}
+        default
+      {/if}
+    </p>
     {#if $STATE.clockwatch_font_size_em !== 1}
       <p>Click with middle mouse button on clockwatch to reset font size</p>
     {/if}
@@ -174,6 +182,9 @@
   }
   .indent-input-container > div {
     width: auto;
+  }
+  .current-timer {
+    font-style: italic;
   }
   .center {
     margin: auto;
