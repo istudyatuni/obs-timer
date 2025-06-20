@@ -7,7 +7,7 @@ import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
 import { LOCAL_STATE_KEY } from "./hashes";
 
 export const DEFAULT_STORAGE = {
-	version: 5,
+	version: 6,
 
 	// clockwatch
 	clockwatch_seconds: 0,
@@ -23,6 +23,9 @@ export const DEFAULT_STORAGE = {
 	clockwatch_right_padding_em: 1,
 	clockwatch_top_padding_em: 1,
 	clockwatch_bottom_padding_em: 1,
+
+	// ui
+	auto_hide_settings: true,
 
 	// deleted
 	// clockwatch

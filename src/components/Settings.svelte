@@ -84,7 +84,10 @@
 {/snippet}
 
 <div class="settings-wrapper">
-  <div class:hidden={$SETTINGS_HIDDEN || !$MOUSE_IN_WINDOW} class="settings">
+  <div
+    class:hidden={$SETTINGS_HIDDEN ||
+      (!$MOUSE_IN_WINDOW && $STATE.auto_hide_settings)}
+    class="settings">
     <div class="center">
       <button onclick={handle_play_pause}>
         {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
@@ -160,6 +163,12 @@
         {@render padding_input("clockwatch_bottom_padding_em")}
       </div>
       <button class="pad" onclick={handle_reset_paddings}>Reset</button>
+    </div>
+    <div class="pad">
+      <label class="pointer">
+        <input type="checkbox" bind:checked={$STATE.auto_hide_settings} />
+        Hide settings automatically
+      </label>
     </div>
     <p class="current-timer">
       Current timer:
