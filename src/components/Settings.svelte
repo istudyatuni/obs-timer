@@ -99,7 +99,9 @@
     class:hour={component === "hour"}
     {value}
     min={should_set_min_hms_input(component) ? "0" : null}
-    onwheel={() => {}}
+    onwheel={() => {
+      /* it seems that svelte delete default event handler, so return something to make scroll-to-change work */
+    }}
     oninput={make_handler_onchange_hms(component)} />
 {/snippet}
 
