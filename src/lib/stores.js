@@ -18,6 +18,10 @@ export const DEFAULT_STORAGE = {
 	clockwatch_bottom_padding_em: 1,
 };
 
+export const PADDING_STORAGE_KEYS = Object.keys(DEFAULT_STORAGE).filter((k) =>
+	k.endsWith("padding_em"),
+);
+
 export const STATE = localStore("timer-data", DEFAULT_STORAGE);
 
 export const SETTINGS_HIDDEN = writable(true);

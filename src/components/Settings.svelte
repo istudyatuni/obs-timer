@@ -6,7 +6,12 @@
     CLOCK_POSITIONS,
     CLOCKWATCH_STATUSES,
   } from "../lib/constants";
-  import { DEFAULT_STORAGE, SETTINGS_HIDDEN, STATE } from "../lib/stores";
+  import {
+    DEFAULT_STORAGE,
+    PADDING_STORAGE_KEYS,
+    SETTINGS_HIDDEN,
+    STATE,
+  } from "../lib/stores";
   import {
     format_hms,
     parse_time_hms,
@@ -34,6 +39,11 @@
     }
     STATE.set("clockwatch_status", status);
   }
+  function handle_reset_paddings() {
+    for (let key of PADDING_STORAGE_KEYS) {
+      STATE.set(key, 1);
+    }
+  }
 
   function make_handler_onchange_hms(component) {
     return (e) => {
@@ -58,17 +68,11 @@
     class={classes}>{CLOCK_POSITION_NAMES[position_key]}</button>
 {/snippet}
 
-{#snippet padding_input(name, key)}
+{#snippet padding_input(key)}
+  <!-- extra div for grid -->
+  <div></div>
   <div class="pad">
-    <label>
-      {name}:
-      <input
-        type="number"
-        bind:value={$STATE[key]}
-        min="0"
-        max="20"
-        step="0.1" />
-    </label>
+    <input type="number" bind:value={$STATE[key]} min="0" max="20" step="0.1" />
   </div>
 {/snippet}
 
@@ -123,10 +127,13 @@
     </div>
     <div>
       <p>Indent:</p>
-      {@render padding_input("Top", "clockwatch_top_padding_em")}
-      {@render padding_input("Bottom", "clockwatch_bottom_padding_em")}
-      {@render padding_input("Left", "clockwatch_left_padding_em")}
-      {@render padding_input("Right", "clockwatch_right_padding_em")}
+      <div class="indent-input-container">
+        {@render padding_input("clockwatch_top_padding_em")}
+        {@render padding_input("clockwatch_left_padding_em")}
+        {@render padding_input("clockwatch_right_padding_em")}
+        {@render padding_input("clockwatch_bottom_padding_em")}
+      </div>
+      <button class="pad" onclick={handle_reset_paddings}>Reset</button>
     </div>
     {#if $STATE.clockwatch_font_size_em !== 1}
       <p>Click with middle mouse button on clockwatch to reset font size</p>
@@ -152,6 +159,14 @@
     padding: 1em;
     margin: auto;
     margin-top: 1em;
+  }
+  .indent-input-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .indent-input-container > div {
+    width: auto;
   }
   .pad {
     margin-top: 5px;
