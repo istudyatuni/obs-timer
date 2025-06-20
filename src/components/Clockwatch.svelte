@@ -29,7 +29,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-  class="clockwatch"
+  class="clockwatch pointer"
   class:position_bottom
   class:position_right
   style="
@@ -49,7 +49,6 @@
   .clockwatch {
     position: absolute;
     font-family: "Fira Code", monospace;
-    cursor: pointer;
   }
   .position_right {
     right: 0;

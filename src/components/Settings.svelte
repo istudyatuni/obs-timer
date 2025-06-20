@@ -89,6 +89,14 @@
       <button onclick={handle_reset}>Reset</button>
     </div>
     <div class="pad">
+      <label class="pointer">
+        <input
+          type="checkbox"
+          bind:checked={$STATE.clockwatch_tick_when_closed} />
+        Tick when page is closed
+      </label>
+    </div>
+    <div class="pad">
       <label class="time-input">
         Set time:
         <input
