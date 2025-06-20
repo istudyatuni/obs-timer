@@ -104,6 +104,12 @@
       </label>
     </div>
     <div class="pad">
+      <label class="pointer">
+        <input type="checkbox" bind:checked={$STATE.hide_empty_hour} />
+        Hide empty hours
+      </label>
+    </div>
+    <div class="pad">
       <label class="time-input">
         Set time:
         <input

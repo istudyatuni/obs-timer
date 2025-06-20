@@ -7,7 +7,7 @@ import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
 import { LOCAL_STATE_KEY } from "./hashes";
 
 export const DEFAULT_STORAGE = {
-	version: 4,
+	version: 5,
 
 	// clockwatch
 	clockwatch_seconds: 0,
@@ -15,6 +15,7 @@ export const DEFAULT_STORAGE = {
 	clock_position: CLOCK_POSITIONS.top_left,
 	clockwatch_last_time: 0,
 	clockwatch_tick_when_closed: false,
+	hide_empty_hour: false,
 
 	// sizes and paddings
 	clockwatch_font_size_em: 1,

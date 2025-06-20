@@ -11,6 +11,8 @@
 <script>
   start_clockwatch();
 
+  let hms = $derived(split_time_hms($STATE.clockwatch_seconds));
+
   let position_bottom = $derived(
     [CLOCK_POSITIONS.bottom_left, CLOCK_POSITIONS.bottom_right].includes(
       $STATE.clock_position,
@@ -46,7 +48,11 @@
   "
   onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}
   onmousedown={handle_font_size_reset}>
-  {format_hms(split_time_hms($STATE.clockwatch_seconds))}
+  {#if $STATE.hide_empty_hour}
+    {format_hms(hms.slice(1))}
+  {:else}
+    {format_hms(hms)}
+  {/if}
 </div>
 
 <style>
