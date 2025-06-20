@@ -36,6 +36,7 @@ export const PADDING_STORAGE_KEYS = Object.keys(DEFAULT_STORAGE).filter((k) =>
 );
 
 export const STATE = localStore(LOCAL_STATE_KEY, DEFAULT_STORAGE);
+export const LOCAL_STORAGE = localStorageStore();
 
 export const SETTINGS_HIDDEN = writable(true);
 export const MOUSE_IN_WINDOW = writable(true);
@@ -79,4 +80,19 @@ function migrate_clockwatch_to_seconds() {
 // only used for migration
 function parse_time_hms(time) {
 	return time.split(":").map((e) => parseInt(e));
+}
+
+function localStorageStore() {
+	const st = window.localStorage;
+	const { subscribe, update } = writable(st);
+
+	return {
+		subscribe,
+		delete: (key) =>
+			update((data) => {
+				delete data[key];
+				st.removeItem(key);
+				return data;
+			}),
+	};
 }

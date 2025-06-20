@@ -8,6 +8,7 @@
   } from "../lib/constants";
   import {
     DEFAULT_STORAGE,
+    LOCAL_STORAGE,
     MOUSE_IN_WINDOW,
     PADDING_STORAGE_KEYS,
     SETTINGS_HIDDEN,
@@ -21,6 +22,14 @@
 </script>
 
 <script>
+  import {
+    LOCAL_STATE_KEY_PREFIX,
+    LOCAL_STATE_KEY_PREFIX_REGEX,
+  } from "../lib/hashes";
+
+  let wait_confirm = $state(false);
+  let wait_confirm_key = $state(null);
+
   let hms = $derived(split_time_hms($STATE.clockwatch_seconds));
 
   function handle_set_position(pos) {
@@ -44,6 +53,20 @@
     for (let key of PADDING_STORAGE_KEYS) {
       STATE.set(key, 1);
     }
+  }
+  function handle_remove_timer(name) {
+    if (!wait_confirm) {
+      wait_confirm = true;
+      wait_confirm_key = name;
+      return;
+    }
+    if (wait_confirm_key === name) {
+      LOCAL_STORAGE.delete(LOCAL_STATE_KEY_PREFIX + name);
+    }
+  }
+  function cancel_remove_timer() {
+    wait_confirm = false;
+    wait_confirm_key = null;
   }
 
   function make_handler_onchange_hms(component) {
@@ -103,6 +126,28 @@
       /* it seems that svelte delete default event handler, so return something to make scroll-to-change work */
     }}
     oninput={make_handler_onchange_hms(component)} />
+{/snippet}
+
+{#snippet timer_entry(name)}
+  <li>
+    {#if name !== ""}
+      {name}
+    {:else}
+      <i>default</i>
+    {/if}
+    {#if name !== window.location.hash}
+      <button onclick={() => handle_remove_timer(name)}>
+        {#if wait_confirm}
+          confirm?
+        {:else}
+          remove
+        {/if}
+      </button>
+      {#if wait_confirm && name === wait_confirm_key}
+        <button onclick={cancel_remove_timer}>cancel</button>
+      {/if}
+    {/if}
+  </li>
 {/snippet}
 
 <div class="settings-wrapper">
@@ -186,6 +231,16 @@
         default
       {/if}
     </p>
+    <details>
+      <summary>Saved timers</summary>
+      <ul>
+        {#each Object.keys($LOCAL_STORAGE)
+          .filter((k) => k.startsWith(LOCAL_STATE_KEY_PREFIX))
+          .map( (k) => k.replace(LOCAL_STATE_KEY_PREFIX_REGEX, ""), ) as timer_name (timer_name)}
+          {@render timer_entry(timer_name)}
+        {/each}
+      </ul>
+    </details>
     {#if $STATE.clockwatch_font_size_em !== 1}
       <p>Click with middle mouse button on clockwatch to reset font size</p>
     {/if}
