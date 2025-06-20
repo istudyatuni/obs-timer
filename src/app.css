@@ -11,14 +11,11 @@ body {
   overflow: hidden;
 }
 
-button {
+button,
+.pointer {
   cursor: pointer;
 }
 
 .hidden {
   display: none;
-}
-
-.pointer {
-  cursor: pointer;
 }
