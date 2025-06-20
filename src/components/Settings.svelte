@@ -122,7 +122,7 @@
       {@render position_button("bottom_right")}
     </div>
     <div>
-      <p>Padding:</p>
+      <p>Indent:</p>
       {@render padding_input("Top", "clockwatch_top_padding_em")}
       {@render padding_input("Bottom", "clockwatch_bottom_padding_em")}
       {@render padding_input("Left", "clockwatch_left_padding_em")}
