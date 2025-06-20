@@ -8,6 +8,7 @@
   } from "../lib/constants";
   import {
     DEFAULT_STORAGE,
+    MOUSE_IN_WINDOW,
     PADDING_STORAGE_KEYS,
     SETTINGS_HIDDEN,
     STATE,
@@ -77,7 +78,7 @@
 {/snippet}
 
 <div class="settings-wrapper">
-  <div class:hidden={$SETTINGS_HIDDEN} class="settings">
+  <div class:hidden={$SETTINGS_HIDDEN || !$MOUSE_IN_WINDOW} class="settings">
     <div class="center">
       <button onclick={handle_play_pause}>
         {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}

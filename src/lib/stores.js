@@ -30,6 +30,7 @@ export const PADDING_STORAGE_KEYS = Object.keys(DEFAULT_STORAGE).filter((k) =>
 export const STATE = localStore(LOCAL_STATE_KEY, DEFAULT_STORAGE);
 
 export const SETTINGS_HIDDEN = writable(true);
+export const MOUSE_IN_WINDOW = writable(true);
 
 export function migrate_storage() {
 	function migrate(store, default_kv) {
