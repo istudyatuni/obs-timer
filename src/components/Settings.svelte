@@ -185,9 +185,7 @@
     </details>
     <div class:hidden={$STATE.hide_help}>
       <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
-      {#if $STATE.clockwatch_font_size_em !== DEFAULT_STORAGE.clockwatch_font_size_em}
-        <p>Click with middle mouse button on clockwatch to reset font size</p>
-      {/if}
+      <p>Click with middle mouse button on clockwatch to reset font size</p>
       <div class="footer">
         <a href="https://github.com/istudyatuni/simple-timer"
           ><GithubIcon width="30" height="30" /></a>
