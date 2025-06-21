@@ -19,6 +19,12 @@
     recalculate_hms,
     join_time_hms,
   } from "../lib/clockwatch";
+
+  const HMS = {
+    hour: "hour",
+    minute: "minute",
+    second: "second",
+  };
 </script>
 
 <script>
@@ -73,11 +79,11 @@
     return (e) => {
       let index = 0;
       let value = parseInt(e.target.value);
-      if (component === "hour") {
+      if (component === HMS.hour) {
         index = 0;
-      } else if (component === "minute") {
+      } else if (component === HMS.minute) {
         index = 1;
-      } else if (component === "second") {
+      } else if (component === HMS.second) {
         index = 2;
       }
       hms[index] = value;
@@ -86,11 +92,11 @@
   }
 
   function should_set_min_hms_input(component) {
-    if (component === "hour") {
+    if (component === HMS.hour) {
       return true;
-    } else if (component === "minute") {
+    } else if (component === HMS.minute) {
       return hms[0] === 0;
-    } else if (component === "second") {
+    } else if (component === HMS.second) {
       return hms[0] === 0 && hms[1] === 0;
     }
   }
@@ -119,7 +125,7 @@
 {#snippet time_input(component, value)}
   <input
     type="number"
-    class:hour={component === "hour"}
+    class:hour={component === HMS.hour}
     {value}
     min={should_set_min_hms_input(component) ? "0" : null}
     onwheel={() => {
@@ -181,9 +187,9 @@
     <div class="pad">
       <label class="time-input">
         Set time:
-        {@render time_input("hour", hms[0])}
-        {@render time_input("minute", hms[1])}
-        {@render time_input("second", hms[2])}
+        {@render time_input(HMS.hour, hms[0])}
+        {@render time_input(HMS.minute, hms[1])}
+        {@render time_input(HMS.second, hms[2])}
       </label>
       <button class="pad" onclick={handle_reset_time}>Reset time</button>
     </div>
