@@ -1,5 +1,4 @@
-$danger-color: #ff9898;
-$blue-color: #4da8da;
+@use "colors.scss";
 
 :root {
   font-family: sans-serif;
@@ -53,7 +52,7 @@ input[type="checkbox"] {
   }
 
   &:checked {
-    background-color: $blue-color;
+    background-color: colors.$blue;
 
     // checkmark, created using transformations on white border
     &::after {
@@ -82,7 +81,7 @@ code {
 }
 
 a {
-  color: $blue-color;
+  color: colors.$blue;
 }
 
 .hidden {
@@ -98,9 +97,9 @@ a {
 }
 
 .danger-fg {
-  color: $danger-color;
+  color: colors.$danger;
 }
 
 .danger-bg {
-  background-color: $danger-color;
+  background-color: colors.$danger;
 }

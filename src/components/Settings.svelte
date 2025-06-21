@@ -58,6 +58,8 @@
 </div>
 
 <style lang="scss">
+  @use "../colors.scss";
+
   .settings-wrapper {
     position: absolute;
     width: 100%;
@@ -85,6 +87,9 @@
   }
   details {
     margin-top: 8px;
+  }
+  summary::marker {
+    color: colors.$blue;
   }
   .current-timer {
     font-style: italic;
