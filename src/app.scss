@@ -1,3 +1,6 @@
+$danger-color: #ff9898;
+$blue-color: #4da8da;
+
 :root {
   font-family: sans-serif;
 }
@@ -50,7 +53,7 @@ input[type="checkbox"] {
   }
 
   &:checked {
-    background-color: blue;
+    background-color: $blue-color;
 
     // checkmark, created using transformations on white border
     &::after {
@@ -88,8 +91,6 @@ code {
 .pad-top {
   margin-top: 5px;
 }
-
-$danger-color: #ff9898;
 
 .danger-fg {
   color: $danger-color;
