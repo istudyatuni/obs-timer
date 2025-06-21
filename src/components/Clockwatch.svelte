@@ -11,12 +11,7 @@
     start_clockwatch,
   } from "../lib/clockwatch";
   import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "../lib/constants";
-  import {
-    HIDE_UI,
-    MOUSE_IN_WINDOW,
-    SETTINGS_HIDDEN,
-    STATE,
-  } from "../lib/stores";
+  import { MOUSE_IN_WINDOW, SETTINGS_HIDDEN, STATE } from "../lib/stores";
 </script>
 
 <script>
@@ -104,6 +99,14 @@
     flex-direction: column;
     &.position_bottom {
       flex-direction: column-reverse;
+    }
+
+    & > span {
+      // remove unnecessary vertical paddings
+      height: 1em;
+    }
+    &.position_right > span {
+      text-align: right;
     }
 
     & > .floating {
