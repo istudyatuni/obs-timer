@@ -28,8 +28,11 @@
     <i>default</i>
   {/if}
   {#if name !== window.location.hash}
+    {#if wait_confirm}
+      <button onclick={cancel_remove_timer}>cancel</button>
+    {/if}
     <button
-      class:danger={wait_confirm}
+      class:danger-bg={wait_confirm}
       onclick={() => handle_remove_timer(name)}>
       {#if wait_confirm}
         confirm?
@@ -37,8 +40,5 @@
         remove
       {/if}
     </button>
-    {#if wait_confirm}
-      <button onclick={cancel_remove_timer}>cancel</button>
-    {/if}
   {/if}
 </li>
