@@ -253,21 +253,24 @@
   </div>
 </div>
 
-<style>
-  .time-input > input.hour {
-    width: 4em;
-  }
-  .time-input > input {
-    width: 3em;
+<style lang="scss">
+  .time-input {
+    & > input.hour {
+      width: 4em;
+    }
+    & > input {
+      width: 3em;
+    }
   }
   .settings-wrapper {
     position: absolute;
     width: 100%;
     max-height: 100%;
     overflow-y: scroll;
-  }
-  .settings-wrapper::-webkit-scrollbar {
-    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      scrollbar-width: none;
+    }
   }
   .settings {
     background-color: rgba(1, 1, 1, 0.1);
@@ -282,9 +285,10 @@
   .indent-input-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-  }
-  .indent-input-container > div {
-    width: auto;
+
+    & > div {
+      width: auto;
+    }
   }
   .current-timer {
     font-style: italic;
