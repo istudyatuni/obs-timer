@@ -237,7 +237,7 @@
         default
       {/if}
     </p>
-    <details>
+    <details class="details">
       <summary>Saved timers</summary>
       <ul>
         {#each Object.keys($LOCAL_STORAGE)
@@ -274,10 +274,13 @@
   }
   .settings {
     background-color: rgba(1, 1, 1, 0.1);
-    width: 15em;
+    width: 20em;
     border-radius: 1em;
     padding: 1em;
     margin: 1em auto;
+  }
+  .details li {
+    @extend .pad;
   }
   p.unpad {
     margin-bottom: -0.3em;
