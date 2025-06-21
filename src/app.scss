@@ -88,3 +88,13 @@ code {
 .pad-top {
   margin-top: 5px;
 }
+
+$danger-color: #ff9898;
+
+.danger-fg {
+  color: $danger-color;
+}
+
+.danger-bg {
+  background-color: $danger-color;
+}

@@ -28,7 +28,9 @@
     <i>default</i>
   {/if}
   {#if name !== window.location.hash}
-    <button onclick={() => handle_remove_timer(name)}>
+    <button
+      class:danger={wait_confirm}
+      onclick={() => handle_remove_timer(name)}>
       {#if wait_confirm}
         confirm?
       {:else}
