@@ -78,8 +78,8 @@
       type="number"
       bind:value={$STATE[key]}
       onwheel={() => {}}
-      min="0"
-      max="20"
+      min="-100"
+      max="100"
       step="0.1" />
   </div>
 {/snippet}
@@ -204,6 +204,12 @@
 
     & > div {
       width: auto;
+    }
+    & input {
+      min-width: 3em;
+      // using max-width because field-sizing is not available everywhere
+      max-width: 3em;
+      field-sizing: content;
     }
   }
   .current-timer {
