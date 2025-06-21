@@ -1,4 +1,6 @@
 <script module>
+  import GithubIcon from "~icons/tabler/brand-github";
+
   import SettingsCheckbox from "./SettingsCheckbox.svelte";
   import SettingsTimerEntry from "./SettingsTimerEntry.svelte";
 
@@ -6,7 +8,6 @@
   import {
     DEFAULT_STORAGE,
     HIDE_UI,
-    MOUSE_IN_WINDOW,
     PADDING_STORAGE_KEYS,
     SETTINGS_HIDDEN,
     STATE,
@@ -164,12 +165,16 @@
         {/each}
       </ul>
     </details>
-    <p class:hidden={$STATE.hide_help}>
-      To create more timers add a hash to the URL: <code>#my-timer</code>
-    </p>
-    {#if $STATE.clockwatch_font_size_em !== DEFAULT_STORAGE.clockwatch_font_size_em && !$STATE.hide_help}
-      <p>Click with middle mouse button on clockwatch to reset font size</p>
-    {/if}
+    <div class:hidden={$STATE.hide_help}>
+      <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
+      {#if $STATE.clockwatch_font_size_em !== DEFAULT_STORAGE.clockwatch_font_size_em}
+        <p>Click with middle mouse button on clockwatch to reset font size</p>
+      {/if}
+      <div class="footer">
+        <a href="https://github.com/istudyatuni/simple-timer"
+          ><GithubIcon width="30" height="30" /></a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -218,5 +223,8 @@
   }
   .current-timer {
     font-style: italic;
+  }
+  .footer {
+    text-align: center;
   }
 </style>
