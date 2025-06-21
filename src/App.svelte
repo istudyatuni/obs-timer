@@ -1,6 +1,7 @@
 <script module>
   import Clockwatch from "./components/Clockwatch.svelte";
   import Settings from "./components/Settings.svelte";
+  import { is_in_obs } from "./lib/obs";
 
   import { migrate_storage, MOUSE_IN_WINDOW } from "./lib/stores";
 </script>
@@ -18,7 +19,7 @@
   on:hashchange={() => window.location.reload()} />
 <svelte:body onmouseleave={leave} onmouseenter={enter} />
 
-<main class:obs={window.obsstudio !== undefined}>
+<main class:obs={is_in_obs()}>
   <Settings />
   <Clockwatch />
 </main>

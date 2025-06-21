@@ -9,6 +9,7 @@ import {
 	LOCAL_STATE_KEY_PREFIX,
 	LOCAL_STATE_KEY_PREFIX_REGEX,
 } from "./hashes";
+import { is_in_obs } from "./obs";
 
 export const DEFAULT_STORAGE = {
 	version: 8,
@@ -30,7 +31,7 @@ export const DEFAULT_STORAGE = {
 	clockwatch_bottom_padding_em: 1,
 
 	// ui
-	auto_hide_settings: true,
+	auto_hide_settings: is_in_obs(),
 	hide_help: false,
 
 	// deleted
