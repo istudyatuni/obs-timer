@@ -1,5 +1,5 @@
 <script module>
-  import { DEFAULT_STORAGE, STATE } from "../lib/stores";
+  import { DEFAULT_STORAGE, STATE } from "@/lib/stores";
 </script>
 
 <script>

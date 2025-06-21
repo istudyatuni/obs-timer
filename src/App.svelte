@@ -1,9 +1,9 @@
 <script module>
-  import Clockwatch from "./components/Clockwatch.svelte";
-  import Settings from "./components/Settings.svelte";
-  import { is_in_obs } from "./lib/obs";
+  import Clockwatch from "@/components/Clockwatch.svelte";
+  import Settings from "@/components/Settings.svelte";
 
-  import { migrate_storage, MOUSE_IN_WINDOW } from "./lib/stores";
+  import { is_in_obs } from "@/lib/obs";
+  import { migrate_storage, MOUSE_IN_WINDOW } from "@/lib/stores";
 </script>
 
 <script>

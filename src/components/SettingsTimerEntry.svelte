@@ -1,6 +1,6 @@
 <script module>
-  import { LOCAL_STATE_KEY_PREFIX } from "../lib/hashes";
-  import { LOCAL_STORAGE } from "../lib/stores";
+  import { LOCAL_STATE_KEY_PREFIX } from "@/lib/hashes";
+  import { LOCAL_STORAGE } from "@/lib/stores";
 </script>
 
 <script>

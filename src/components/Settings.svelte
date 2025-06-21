@@ -1,19 +1,14 @@
 <script module>
   import GithubIcon from "~icons/tabler/brand-github";
 
-  import SettingsCheckbox from "./SettingsCheckbox.svelte";
-  import SettingsClockwatchPosition from "./SettingsClockwatchPosition.svelte";
-  import SettingsFontOptions from "./SettingsFontOptions.svelte";
-  import SettingsTimeInput from "./SettingsTimeInput.svelte";
-  import SettingsTimerEntry from "./SettingsTimerEntry.svelte";
+  import SettingsCheckbox from "@/components/SettingsCheckbox.svelte";
+  import SettingsClockwatchPosition from "@/components/SettingsClockwatchPosition.svelte";
+  import SettingsFontOptions from "@/components/SettingsFontOptions.svelte";
+  import SettingsTimeInput from "@/components/SettingsTimeInput.svelte";
+  import SettingsTimerEntry from "@/components/SettingsTimerEntry.svelte";
 
-  import {
-    HIDE_UI,
-    SETTINGS_HIDDEN,
-    STATE,
-    STORED_TIMERS,
-  } from "../lib/stores";
-  import { is_in_obs } from "../lib/obs";
+  import { HIDE_UI, SETTINGS_HIDDEN, STATE, STORED_TIMERS } from "@/lib/stores";
+  import { is_in_obs } from "@/lib/obs";
 </script>
 
 <div class="settings-wrapper">
@@ -54,7 +49,7 @@
 </div>
 
 <style lang="scss">
-  @use "../colors.scss";
+  @use "@/colors.scss";
 
   .settings-wrapper {
     position: absolute;

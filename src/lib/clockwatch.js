@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 
-import { STATE } from "./stores";
-import { CLOCKWATCH_STATUSES } from "./constants";
+import { STATE } from "@/lib/stores";
+import { CLOCKWATCH_STATUSES } from "@/lib/constants";
 
 const MS_IN_S = 1000;
 

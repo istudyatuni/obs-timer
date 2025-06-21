@@ -1,6 +1,6 @@
 <script module>
-  import { CLOCK_POSITION_NAMES, CLOCK_POSITIONS } from "../lib/constants";
-  import { PADDING_STORAGE_KEYS, STATE } from "../lib/stores";
+  import { CLOCK_POSITION_NAMES, CLOCK_POSITIONS } from "@/lib/constants";
+  import { PADDING_STORAGE_KEYS, STATE } from "@/lib/stores";
 </script>
 
 <script>

@@ -1,10 +1,10 @@
 <script module>
-  import { DEFAULT_STORAGE, STATE } from "../lib/stores";
+  import { DEFAULT_STORAGE, STATE } from "@/lib/stores";
   import {
     split_time_hms,
     recalculate_hms,
     join_time_hms,
-  } from "../lib/clockwatch";
+  } from "@/lib/clockwatch";
 
   const HMS = {
     hour: "hour",

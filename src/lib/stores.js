@@ -2,14 +2,14 @@ import { derived, get, writable } from "svelte/store";
 
 import { localStore } from "svelte-storages";
 
-import { join_time_hms } from "./clockwatch";
-import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
+import { join_time_hms } from "@/lib/clockwatch";
+import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "@/lib/constants";
 import {
 	LOCAL_STATE_KEY,
 	LOCAL_STATE_KEY_PREFIX,
 	LOCAL_STATE_KEY_PREFIX_REGEX,
-} from "./hashes";
-import { is_in_obs } from "./obs";
+} from "@/lib/hashes";
+import { is_in_obs } from "@/lib/obs";
 
 export const DEFAULT_STORAGE = {
 	version: 8,

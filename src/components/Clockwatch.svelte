@@ -9,9 +9,9 @@
     format_hms,
     split_time_hms,
     start_clockwatch,
-  } from "../lib/clockwatch";
-  import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "../lib/constants";
-  import { MOUSE_IN_WINDOW, SETTINGS_HIDDEN, STATE } from "../lib/stores";
+  } from "@/lib/clockwatch";
+  import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "@/lib/constants";
+  import { MOUSE_IN_WINDOW, SETTINGS_HIDDEN, STATE } from "@/lib/stores";
 </script>
 
 <script>
