@@ -3,6 +3,7 @@
 
   import PlayIcon from "~icons/tabler/player-play-filled";
   import PauseIcon from "~icons/tabler/player-pause-filled";
+  import SettingsIcon from "~icons/tabler/settings";
 
   import {
     format_hms,
@@ -68,7 +69,6 @@
   ">
   <span
     style="font-size: {$STATE.clockwatch_font_size_em}em"
-    onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}
     onmousedown={handle_font_size_reset}>
     {#if $STATE.hide_empty_hour}
       {format_hms(hms.slice(1))}
@@ -85,6 +85,11 @@
         {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
           <PlayIcon />
         {/if}
+      </button>
+      <button
+        class="icon"
+        onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}>
+        <SettingsIcon />
       </button>
     </div>
   </div>
