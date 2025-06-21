@@ -29,6 +29,16 @@
       $STATE.clock_position,
     ),
   );
+  let margin = $derived(
+    [
+      $STATE.clockwatch_top_padding_em,
+      $STATE.clockwatch_right_padding_em,
+      $STATE.clockwatch_bottom_padding_em,
+      $STATE.clockwatch_left_padding_em,
+    ]
+      .map((p) => p + "em")
+      .join(" "),
+  );
 
   function handle_play_pause() {
     let status = get(STATE).clockwatch_status;
@@ -56,15 +66,9 @@
   class:position_bottom
   class:position_right
   style:font-family="'{$STATE.clockwatch_font_family.trim()}', monospace"
-  style="
-    margin:
-      {$STATE.clockwatch_top_padding_em}em
-      {$STATE.clockwatch_right_padding_em}em
-      {$STATE.clockwatch_bottom_padding_em}em
-      {$STATE.clockwatch_left_padding_em}em;
-  ">
+  style:margin>
   <span
-    style="font-size: {$STATE.clockwatch_font_size_em}em"
+    style:font-size="{$STATE.clockwatch_font_size_em}em"
     onmousedown={handle_font_size_reset}>
     {#if $STATE.hide_empty_hour && hms[0] === 0}
       {format_hms(hms.slice(1))}
