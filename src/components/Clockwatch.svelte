@@ -51,12 +51,6 @@
     }
     STATE.set("clockwatch_status", status);
   }
-  function handle_font_size_reset(e) {
-    if (e.which === 2) {
-      // middle mouse button pressed
-      STATE.set("clockwatch_font_size_em", 1);
-    }
-  }
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -67,9 +61,7 @@
   class:position_right
   style:font-family="'{$STATE.clockwatch_font_family.trim()}', monospace"
   style:margin>
-  <span
-    style:font-size="{$STATE.clockwatch_font_size_em}em"
-    onmousedown={handle_font_size_reset}>
+  <span style:font-size="{$STATE.clockwatch_font_size_em}em">
     {#if $STATE.hide_empty_hour && hms[0] === 0}
       {format_hms(hms.slice(1))}
     {:else}

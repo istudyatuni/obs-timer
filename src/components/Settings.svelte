@@ -185,7 +185,6 @@
     </details>
     <div class:hidden={$STATE.hide_help}>
       <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
-      <p>Click with middle mouse button on clockwatch to reset font size</p>
       <div class="footer">
         <a href="https://github.com/istudyatuni/simple-timer"
           ><GithubIcon width="30" height="30" /></a>
@@ -209,16 +208,21 @@
     max-height: 100%;
     overflow-y: scroll;
 
+    pointer-events: none;
+    z-index: 1;
+
     &::-webkit-scrollbar {
       scrollbar-width: none;
     }
   }
   .settings {
-    background-color: rgba(1, 1, 1, 0.1);
+    background-color: hsl(0, 0, 90);
     width: 20em;
     border-radius: 1em;
     padding: 1em;
     margin: 1em auto;
+
+    pointer-events: initial;
   }
   p.unpad {
     margin-bottom: -0.3em;
