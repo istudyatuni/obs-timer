@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@homer0/prettier-plugin-jsdoc": "^10.0.0",
+    "@iconify-json/tabler": "^1.2.19",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@types/obs-studio": "^2.17.2",
     "prettier": "^3.5.3",
@@ -18,6 +19,7 @@
     "sass-embedded": "^1.89.2",
     "svelte": "^5.28.1",
     "svelte-storages": "^0.0.3",
+    "unplugin-icons": "^22.1.0",
     "vite": "^6.3.5"
   }
 }
