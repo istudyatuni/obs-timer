@@ -18,7 +18,6 @@
 <div class="settings-wrapper">
   <div class:hidden={$SETTINGS_HIDDEN || $HIDE_UI} class="settings">
     <SettingsTimeInput />
-    <SettingsFontOptions />
     <SettingsCheckbox bind:checked={$STATE.clockwatch_tick_when_closed}
       >Tick when page is closed</SettingsCheckbox>
     <SettingsCheckbox bind:checked={$STATE.hide_empty_hour}
@@ -27,7 +26,11 @@
       >Hide settings automatically</SettingsCheckbox>
     <SettingsCheckbox bind:checked={$STATE.hide_help}
       >Hide help</SettingsCheckbox>
-    <SettingsClockwatchPosition />
+    <details>
+      <summary>Style settings</summary>
+      <SettingsFontOptions />
+      <SettingsClockwatchPosition />
+    </details>
     <p class="current-timer">
       Current timer:
       {#if window.location.hash !== ""}
@@ -79,6 +82,9 @@
     margin: 1em auto;
 
     pointer-events: initial;
+  }
+  details {
+    margin-top: 8px;
   }
   .current-timer {
     font-style: italic;
