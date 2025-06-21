@@ -143,7 +143,7 @@
     {/if}
     {#if name !== window.location.hash}
       <button onclick={() => handle_remove_timer(name)}>
-        {#if wait_confirm}
+        {#if wait_confirm && name === wait_confirm_key}
           confirm?
         {:else}
           remove
