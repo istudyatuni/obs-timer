@@ -59,10 +59,10 @@ input[type="checkbox"] {
     &::after {
       content: "";
       position: absolute;
-      top: 0.11em;
+      top: 0.18em;
       left: 0.38em;
-      width: 0.25em;
-      height: 0.6em;
+      width: 0.28em;
+      height: 0.5em;
       border: solid white;
       border-width: 0 0.15em 0.15em 0;
       transform: rotate(45deg);
