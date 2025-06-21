@@ -154,7 +154,7 @@
         default
       {/if}
     </p>
-    <details class="details">
+    <details class="details" class:hidden={$STORED_TIMERS.length === 1}>
       <summary>Saved timers</summary>
       <ul>
         {#each $STORED_TIMERS as timer_name (timer_name)}
@@ -162,6 +162,7 @@
         {/each}
       </ul>
     </details>
+    <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
     {#if $STATE.clockwatch_font_size_em !== 1}
       <p>Click with middle mouse button on clockwatch to reset font size</p>
     {/if}
