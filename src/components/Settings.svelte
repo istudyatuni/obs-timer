@@ -123,6 +123,12 @@
           step="0.1" />
       </label>
     </div>
+    <div class="pad-top">
+      <label>
+        Font family:
+        <input type="text" bind:value={$STATE.clockwatch_font_family} />
+      </label>
+    </div>
     <SettingsCheckbox bind:checked={$STATE.clockwatch_tick_when_closed}
       >Tick when page is closed</SettingsCheckbox>
     <SettingsCheckbox bind:checked={$STATE.hide_empty_hour}
@@ -226,5 +232,8 @@
   }
   .footer {
     text-align: center;
+  }
+  input[type="text"] {
+    field-sizing: content;
   }
 </style>

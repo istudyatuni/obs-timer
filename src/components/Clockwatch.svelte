@@ -55,6 +55,7 @@
   class="clockwatch"
   class:position_bottom
   class:position_right
+  style:font-family="'{$STATE.clockwatch_font_family.trim()}', monospace"
   style="
     margin:
       {$STATE.clockwatch_top_padding_em}em
@@ -93,7 +94,6 @@
 <style lang="scss">
   .clockwatch {
     position: absolute;
-    font-family: "Fira Code", monospace;
 
     display: flex;
     flex-direction: column;

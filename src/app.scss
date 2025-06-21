@@ -70,7 +70,8 @@ input[type="checkbox"] {
   }
 }
 
-input[type="number"] {
+input[type="number"],
+input[type="text"] {
   @extend %interactive-common;
 
   outline: none;

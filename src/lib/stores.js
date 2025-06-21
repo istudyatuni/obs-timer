@@ -11,7 +11,7 @@ import {
 } from "./hashes";
 
 export const DEFAULT_STORAGE = {
-	version: 7,
+	version: 8,
 
 	// clockwatch
 	clockwatch_seconds: 0,
@@ -23,6 +23,7 @@ export const DEFAULT_STORAGE = {
 
 	// sizes and paddings
 	clockwatch_font_size_em: 1,
+	clockwatch_font_family: "Fira Code",
 	clockwatch_left_padding_em: 1,
 	clockwatch_right_padding_em: 1,
 	clockwatch_top_padding_em: 1,
