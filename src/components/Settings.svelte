@@ -164,7 +164,8 @@
         {@render padding_input("clockwatch_right_padding_em")}
         {@render padding_input("clockwatch_bottom_padding_em")}
       </div>
-      <button class="pad-top" onclick={handle_reset_paddings}>Reset</button>
+      <button class="pad-top" onclick={handle_reset_paddings}
+        >Reset indent</button>
     </div>
     <p class="current-timer">
       Current timer:
