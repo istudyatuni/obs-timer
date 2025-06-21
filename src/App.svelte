@@ -23,9 +23,3 @@
   <Settings />
   <Clockwatch />
 </main>
-
-<style>
-  .obs {
-    color: white;
-  }
-</style>

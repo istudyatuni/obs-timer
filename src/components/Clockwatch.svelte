@@ -121,6 +121,9 @@
       visibility: hidden;
     }
   }
+  :global(.obs) .clockwatch {
+    color: white;
+  }
   .position_right {
     right: 0;
   }
