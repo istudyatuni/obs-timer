@@ -1,6 +1,9 @@
 <script module>
   import { get } from "svelte/store";
 
+  import PlayIcon from "~icons/tabler/player-play-filled";
+  import PauseIcon from "~icons/tabler/player-pause-filled";
+
   import {
     format_hms,
     split_time_hms,
@@ -76,11 +79,11 @@
 
   <div class="floating" class:hidden={!$MOUSE_IN_WINDOW}>
     <div class="center">
-      <button onclick={handle_play_pause}>
+      <button class="icon" onclick={handle_play_pause}>
         {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
-          Pause
+          <PauseIcon />
         {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
-          Play
+          <PlayIcon />
         {/if}
       </button>
     </div>
@@ -121,5 +124,8 @@
   .center {
     margin: auto;
     width: fit-content;
+  }
+  button.icon {
+    padding-top: 11px;
   }
 </style>
