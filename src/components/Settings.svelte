@@ -11,11 +11,11 @@
   } from "../lib/constants";
   import {
     DEFAULT_STORAGE,
-    LOCAL_STORAGE,
     MOUSE_IN_WINDOW,
     PADDING_STORAGE_KEYS,
     SETTINGS_HIDDEN,
     STATE,
+    STORED_TIMERS,
   } from "../lib/stores";
   import {
     split_time_hms,
@@ -31,10 +31,6 @@
 </script>
 
 <script>
-  import {
-    LOCAL_STATE_KEY_PREFIX,
-    LOCAL_STATE_KEY_PREFIX_REGEX,
-  } from "../lib/hashes";
   let hms = $derived(split_time_hms($STATE.clockwatch_seconds));
 
   function handle_set_position(pos) {
@@ -189,9 +185,7 @@
     <details class="details">
       <summary>Saved timers</summary>
       <ul>
-        {#each Object.keys($LOCAL_STORAGE)
-          .filter((k) => k.startsWith(LOCAL_STATE_KEY_PREFIX))
-          .map( (k) => k.replace(LOCAL_STATE_KEY_PREFIX_REGEX, ""), ) as timer_name (timer_name)}
+        {#each $STORED_TIMERS as timer_name (timer_name)}
           <SettingsTimerEntry name={timer_name} />
         {/each}
       </ul>

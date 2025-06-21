@@ -1,10 +1,14 @@
-import { get, writable } from "svelte/store";
+import { derived, get, writable } from "svelte/store";
 
 import { localStore } from "svelte-storages";
 
 import { join_time_hms } from "./clockwatch";
 import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "./constants";
-import { LOCAL_STATE_KEY } from "./hashes";
+import {
+	LOCAL_STATE_KEY,
+	LOCAL_STATE_KEY_PREFIX,
+	LOCAL_STATE_KEY_PREFIX_REGEX,
+} from "./hashes";
 
 export const DEFAULT_STORAGE = {
 	version: 6,
@@ -40,6 +44,12 @@ export const LOCAL_STORAGE = localStorageStore();
 
 export const SETTINGS_HIDDEN = writable(true);
 export const MOUSE_IN_WINDOW = writable(true);
+
+export const STORED_TIMERS = derived(LOCAL_STORAGE, ($st) =>
+	Object.keys($st)
+		.filter((k) => k.startsWith(LOCAL_STATE_KEY_PREFIX))
+		.map((k) => k.replace(LOCAL_STATE_KEY_PREFIX_REGEX, "")),
+);
 
 export function migrate_storage() {
 	function migrate(store, default_kv) {
