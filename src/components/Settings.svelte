@@ -146,8 +146,11 @@
       scrollbar-width: none;
     }
   }
+  :global(.obs) .settings {
+    color: initial;
+  }
   .settings {
-    background-color: hsl(0, 0, 90);
+    background-color: hsl(0, 0%, 90%);
     width: 20em;
     border-radius: 1em;
     padding: 1em;
