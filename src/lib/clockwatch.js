@@ -32,7 +32,13 @@ export function format_hms(parts) {
 	return parts.map((p) => p.toString().padStart(2, "0")).join(":");
 }
 
-export function recalculate_hms([h, m, s]) {
+/**
+ * @param {number[]} hms
+ * @returns number[]
+ */
+export function recalculate_hms(hms) {
+	let [h, m, s] = hms;
+
 	let newMinutes = Math.floor(s / 60);
 	m += newMinutes;
 	s -= 60 * newMinutes;
@@ -44,6 +50,7 @@ export function recalculate_hms([h, m, s]) {
 	return [h, m, s];
 }
 
+/** @param {number} seconds */
 function store_hms(seconds) {
 	STATE.set("clockwatch_seconds", seconds);
 	STATE.set("clockwatch_last_time", new Date().getTime());

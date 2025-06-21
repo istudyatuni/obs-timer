@@ -28,6 +28,11 @@
     minute: "minute",
     second: "second",
   };
+  const HMS_INDEX = {
+    hour: 0,
+    minute: 1,
+    second: 2,
+  };
 </script>
 
 <script>
@@ -56,18 +61,10 @@
     }
   }
 
+  /** @param {string} component */
   function make_handler_onchange_hms(component) {
-    return (e) => {
-      let index = 0;
-      let value = parseInt(e.target.value);
-      if (component === HMS.hour) {
-        index = 0;
-      } else if (component === HMS.minute) {
-        index = 1;
-      } else if (component === HMS.second) {
-        index = 2;
-      }
-      hms[index] = value;
+    return (/** @type {InputEvent & { target: HTMLInputElement }} */ e) => {
+      hms[HMS_INDEX[component]] = parseInt(e.target.value);
       STATE.set("clockwatch_seconds", join_time_hms(recalculate_hms(hms)));
     };
   }
@@ -83,13 +80,13 @@
   }
 </script>
 
-{#snippet position_button(position_key)}
+{#snippet position_button(/** @type {string} */ position_key)}
   <button
     onclick={() => handle_set_position(CLOCK_POSITIONS[position_key])}
     class="pad-top">{CLOCK_POSITION_NAMES[position_key]}</button>
 {/snippet}
 
-{#snippet padding_input(key)}
+{#snippet padding_input(/** @type {string} */ key)}
   <!-- extra div for grid -->
   <div></div>
   <div class="pad-top">
@@ -103,7 +100,10 @@
   </div>
 {/snippet}
 
-{#snippet time_input(component, value)}
+{#snippet time_input(
+  /** @type {string} */ component,
+  /** @type {number} */ value,
+)}
   <input
     type="number"
     class:hour={component === HMS.hour}
