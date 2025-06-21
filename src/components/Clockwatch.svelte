@@ -70,7 +70,7 @@
   <span
     style="font-size: {$STATE.clockwatch_font_size_em}em"
     onmousedown={handle_font_size_reset}>
-    {#if $STATE.hide_empty_hour}
+    {#if $STATE.hide_empty_hour && hms[0] === 0}
       {format_hms(hms.slice(1))}
     {:else}
       {format_hms(hms)}
