@@ -178,7 +178,7 @@
     <details class="details" class:hidden={$STORED_TIMERS.length === 1}>
       <summary>Saved timers</summary>
       <ul>
-        {#each $STORED_TIMERS as timer_name (timer_name)}
+        {#each $STORED_TIMERS.toSorted() as timer_name (timer_name)}
           <SettingsTimerEntry name={timer_name} />
         {/each}
       </ul>
