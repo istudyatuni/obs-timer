@@ -23,7 +23,7 @@
 
 <li class="pad-top">
   {#if name !== ""}
-    {name}
+    {decodeURIComponent(name)}
   {:else}
     <i>default</i>
   {/if}

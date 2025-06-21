@@ -33,12 +33,7 @@
       <SettingsClockwatchPosition />
     </details>
     <p class="current-timer">
-      Current timer:
-      {#if window.location.hash !== ""}
-        {window.location.hash}
-      {:else}
-        default
-      {/if}
+      Current timer: {decodeURIComponent(window.location.hash || "default")}
     </p>
     <details class:hidden={$STORED_TIMERS.length === 1}>
       <summary>Saved timers</summary>
