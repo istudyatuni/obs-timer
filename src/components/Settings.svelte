@@ -32,6 +32,7 @@
     LOCAL_STATE_KEY_PREFIX,
     LOCAL_STATE_KEY_PREFIX_REGEX,
   } from "../lib/hashes";
+  import SettingsCheckbox from "./SettingsCheckbox.svelte";
 
   let wait_confirm = $state(false);
   let wait_confirm_key = $state(null);
@@ -105,13 +106,13 @@
 {#snippet position_button(position_key)}
   <button
     onclick={() => handle_set_position(CLOCK_POSITIONS[position_key])}
-    class="pad">{CLOCK_POSITION_NAMES[position_key]}</button>
+    class="pad-top">{CLOCK_POSITION_NAMES[position_key]}</button>
 {/snippet}
 
 {#snippet padding_input(key)}
   <!-- extra div for grid -->
   <div></div>
-  <div class="pad">
+  <div class="pad-top">
     <input
       type="number"
       bind:value={$STATE[key]}
@@ -135,7 +136,7 @@
 {/snippet}
 
 {#snippet timer_entry(name)}
-  <li>
+  <li class="pad-top">
     {#if name !== ""}
       {name}
     {:else}
@@ -170,30 +171,16 @@
         {/if}
       </button>
     </div>
-    <div class="pad">
-      <label class="pointer">
-        <input
-          type="checkbox"
-          bind:checked={$STATE.clockwatch_tick_when_closed} />
-        Tick when page is closed
-      </label>
-    </div>
-    <div class="pad">
-      <label class="pointer">
-        <input type="checkbox" bind:checked={$STATE.hide_empty_hour} />
-        Hide empty hours
-      </label>
-    </div>
-    <div class="pad">
+    <div class="pad-top">
       <label class="time-input">
         Set time:
         {@render time_input(HMS.hour, hms[0])}
         {@render time_input(HMS.minute, hms[1])}
         {@render time_input(HMS.second, hms[2])}
       </label>
-      <button class="pad" onclick={handle_reset_time}>Reset time</button>
+      <button class="pad-top" onclick={handle_reset_time}>Reset time</button>
     </div>
-    <div class="pad">
+    <div class="pad-top">
       <label>
         Font size:
         <input
@@ -205,6 +192,12 @@
           step="0.1" />
       </label>
     </div>
+    <SettingsCheckbox bind:checked={$STATE.clockwatch_tick_when_closed}
+      >Tick when page is closed</SettingsCheckbox>
+    <SettingsCheckbox bind:checked={$STATE.hide_empty_hour}
+      >Hide empty hours</SettingsCheckbox>
+    <SettingsCheckbox bind:checked={$STATE.auto_hide_settings}
+      >Hide settings automatically</SettingsCheckbox>
     <div>
       <p class="unpad">Position:</p>
       {@render position_button("top_left")}
@@ -221,13 +214,7 @@
         {@render padding_input("clockwatch_right_padding_em")}
         {@render padding_input("clockwatch_bottom_padding_em")}
       </div>
-      <button class="pad" onclick={handle_reset_paddings}>Reset</button>
-    </div>
-    <div class="pad">
-      <label class="pointer">
-        <input type="checkbox" bind:checked={$STATE.auto_hide_settings} />
-        Hide settings automatically
-      </label>
+      <button class="pad-top" onclick={handle_reset_paddings}>Reset</button>
     </div>
     <p class="current-timer">
       Current timer:
@@ -279,9 +266,6 @@
     padding: 1em;
     margin: 1em auto;
   }
-  .details li {
-    @extend .pad;
-  }
   p.unpad {
     margin-bottom: -0.3em;
   }
@@ -299,8 +283,5 @@
   .center {
     margin: auto;
     width: fit-content;
-  }
-  .pad {
-    margin-top: 5px;
   }
 </style>
