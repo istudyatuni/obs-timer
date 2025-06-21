@@ -11,7 +11,7 @@ import {
 } from "./hashes";
 
 export const DEFAULT_STORAGE = {
-	version: 6,
+	version: 7,
 
 	// clockwatch
 	clockwatch_seconds: 0,
@@ -30,6 +30,7 @@ export const DEFAULT_STORAGE = {
 
 	// ui
 	auto_hide_settings: true,
+	hide_help: false,
 
 	// deleted
 	// clockwatch

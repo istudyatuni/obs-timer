@@ -128,6 +128,8 @@
       >Hide empty hours</SettingsCheckbox>
     <SettingsCheckbox bind:checked={$STATE.auto_hide_settings}
       >Hide settings automatically</SettingsCheckbox>
+    <SettingsCheckbox bind:checked={$STATE.hide_help}
+      >Hide help</SettingsCheckbox>
     <div>
       <p class="unpad">Position:</p>
       {@render position_button("top_left")}
@@ -162,8 +164,10 @@
         {/each}
       </ul>
     </details>
-    <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
-    {#if $STATE.clockwatch_font_size_em !== 1}
+    <p class:hidden={$STATE.hide_help}>
+      To create more timers add a hash to the URL: <code>#my-timer</code>
+    </p>
+    {#if $STATE.clockwatch_font_size_em !== DEFAULT_STORAGE.clockwatch_font_size_em && !$STATE.hide_help}
       <p>Click with middle mouse button on clockwatch to reset font size</p>
     {/if}
   </div>
