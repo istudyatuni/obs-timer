@@ -112,15 +112,17 @@
     & > .floating {
       padding-top: 0.5em;
       padding-bottom: 0.5em;
-      display: none;
+
+      // using visibility instead of display: none to be able to hover on whole block
+      visibility: hidden;
     }
     &:hover > .floating {
-      display: initial;
+      visibility: initial;
     }
 
     // fix for obs not resetting :hover state when closing "interact" window
     &:hover > .hidden {
-      display: none;
+      visibility: hidden;
     }
   }
   .position_right {
