@@ -1,16 +1,11 @@
 <script module>
-  import { get } from "svelte/store";
-
   import SettingsCheckbox from "./SettingsCheckbox.svelte";
   import SettingsTimerEntry from "./SettingsTimerEntry.svelte";
 
-  import {
-    CLOCK_POSITION_NAMES,
-    CLOCK_POSITIONS,
-    CLOCKWATCH_STATUSES,
-  } from "../lib/constants";
+  import { CLOCK_POSITION_NAMES, CLOCK_POSITIONS } from "../lib/constants";
   import {
     DEFAULT_STORAGE,
+    HIDE_UI,
     MOUSE_IN_WINDOW,
     PADDING_STORAGE_KEYS,
     SETTINGS_HIDDEN,
@@ -43,17 +38,6 @@
   }
   function handle_reset_time() {
     STATE.set("clockwatch_seconds", DEFAULT_STORAGE.clockwatch_seconds);
-  }
-  function handle_play_pause() {
-    let status = get(STATE).clockwatch_status;
-    if (status === CLOCKWATCH_STATUSES.run) {
-      status = CLOCKWATCH_STATUSES.pause;
-    } else if (status === CLOCKWATCH_STATUSES.pause) {
-      status = CLOCKWATCH_STATUSES.run;
-    } else {
-      throw "unhandled clockwatch_status";
-    }
-    STATE.set("clockwatch_status", status);
   }
   function handle_reset_paddings() {
     for (let key of PADDING_STORAGE_KEYS) {
@@ -116,19 +100,7 @@
 {/snippet}
 
 <div class="settings-wrapper">
-  <div
-    class:hidden={$SETTINGS_HIDDEN ||
-      (!$MOUSE_IN_WINDOW && $STATE.auto_hide_settings)}
-    class="settings">
-    <div class="center">
-      <button onclick={handle_play_pause}>
-        {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
-          Pause
-        {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
-          Play
-        {/if}
-      </button>
-    </div>
+  <div class:hidden={$SETTINGS_HIDDEN || $HIDE_UI} class="settings">
     <div class="pad-top">
       <label class="time-input">
         Set time:
@@ -235,9 +207,5 @@
   }
   .current-timer {
     font-style: italic;
-  }
-  .center {
-    margin: auto;
-    width: fit-content;
   }
 </style>

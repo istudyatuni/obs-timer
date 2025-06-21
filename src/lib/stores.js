@@ -44,6 +44,11 @@ export const LOCAL_STORAGE = localStorageStore();
 
 export const SETTINGS_HIDDEN = writable(true);
 export const MOUSE_IN_WINDOW = writable(true);
+export const HIDE_UI = derived(
+	[MOUSE_IN_WINDOW, STATE],
+	([$mouse_in_window, $state]) =>
+		!$mouse_in_window && $state.auto_hide_settings,
+);
 
 export const STORED_TIMERS = derived(LOCAL_STORAGE, ($st) =>
 	Object.keys($st)

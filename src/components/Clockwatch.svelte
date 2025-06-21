@@ -1,11 +1,18 @@
 <script module>
+  import { get } from "svelte/store";
+
   import {
     format_hms,
     split_time_hms,
     start_clockwatch,
   } from "../lib/clockwatch";
-  import { CLOCK_POSITIONS } from "../lib/constants";
-  import { SETTINGS_HIDDEN, STATE } from "../lib/stores";
+  import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "../lib/constants";
+  import {
+    HIDE_UI,
+    MOUSE_IN_WINDOW,
+    SETTINGS_HIDDEN,
+    STATE,
+  } from "../lib/stores";
 </script>
 
 <script>
@@ -24,6 +31,17 @@
     ),
   );
 
+  function handle_play_pause() {
+    let status = get(STATE).clockwatch_status;
+    if (status === CLOCKWATCH_STATUSES.run) {
+      status = CLOCKWATCH_STATUSES.pause;
+    } else if (status === CLOCKWATCH_STATUSES.pause) {
+      status = CLOCKWATCH_STATUSES.run;
+    } else {
+      throw "unhandled clockwatch_status";
+    }
+    STATE.set("clockwatch_status", status);
+  }
   function handle_font_size_reset(e) {
     if (e.which === 2) {
       // middle mouse button pressed
@@ -35,35 +53,73 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-  class="clockwatch pointer"
+  class="clockwatch"
   class:position_bottom
   class:position_right
   style="
-    font-size: {$STATE.clockwatch_font_size_em}em;
     margin:
       {$STATE.clockwatch_top_padding_em}em
       {$STATE.clockwatch_right_padding_em}em
       {$STATE.clockwatch_bottom_padding_em}em
       {$STATE.clockwatch_left_padding_em}em;
-  "
-  onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}
-  onmousedown={handle_font_size_reset}>
-  {#if $STATE.hide_empty_hour}
-    {format_hms(hms.slice(1))}
-  {:else}
-    {format_hms(hms)}
-  {/if}
+  ">
+  <span
+    style="font-size: {$STATE.clockwatch_font_size_em}em"
+    onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}
+    onmousedown={handle_font_size_reset}>
+    {#if $STATE.hide_empty_hour}
+      {format_hms(hms.slice(1))}
+    {:else}
+      {format_hms(hms)}
+    {/if}
+  </span>
+
+  <div class="floating" class:hidden={!$MOUSE_IN_WINDOW}>
+    <div class="center">
+      <button onclick={handle_play_pause}>
+        {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
+          Pause
+        {:else if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.pause}
+          Play
+        {/if}
+      </button>
+    </div>
+  </div>
 </div>
 
-<style>
+<style lang="scss">
   .clockwatch {
     position: absolute;
     font-family: "Fira Code", monospace;
+
+    display: flex;
+    flex-direction: column;
+    &.position_bottom {
+      flex-direction: column-reverse;
+    }
+
+    & > .floating {
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      display: none;
+    }
+    &:hover > .floating {
+      display: initial;
+    }
+
+    // fix for obs not resetting :hover state when closing "interact" window
+    &:hover > .hidden {
+      display: none;
+    }
   }
   .position_right {
     right: 0;
   }
   .position_bottom {
     bottom: 0;
+  }
+  .center {
+    margin: auto;
+    width: fit-content;
   }
 </style>
