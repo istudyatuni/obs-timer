@@ -45,6 +45,14 @@
       STATE.set(key, 1);
     }
   }
+  function set_default_text(e) {
+    if (e.target.value.trim() == "") {
+      STATE.set(
+        "clockwatch_font_family",
+        DEFAULT_STORAGE.clockwatch_font_family,
+      );
+    }
+  }
 
   /** @param {string} component */
   function make_handler_onchange_hms(component) {
@@ -126,7 +134,10 @@
     <div class="pad-top">
       <label>
         Font family:
-        <input type="text" bind:value={$STATE.clockwatch_font_family} />
+        <input
+          type="text"
+          bind:value={$STATE.clockwatch_font_family}
+          onblur={set_default_text} />
       </label>
     </div>
     <SettingsCheckbox bind:checked={$STATE.clockwatch_tick_when_closed}
