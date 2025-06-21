@@ -1,6 +1,9 @@
 <script module>
   import { get } from "svelte/store";
 
+  import SettingsCheckbox from "./SettingsCheckbox.svelte";
+  import SettingsTimerEntry from "./SettingsTimerEntry.svelte";
+
   import {
     CLOCK_POSITION_NAMES,
     CLOCK_POSITIONS,
@@ -32,11 +35,6 @@
     LOCAL_STATE_KEY_PREFIX,
     LOCAL_STATE_KEY_PREFIX_REGEX,
   } from "../lib/hashes";
-  import SettingsCheckbox from "./SettingsCheckbox.svelte";
-
-  let wait_confirm = $state(false);
-  let wait_confirm_key = $state(null);
-
   let hms = $derived(split_time_hms($STATE.clockwatch_seconds));
 
   function handle_set_position(pos) {
@@ -60,20 +58,6 @@
     for (let key of PADDING_STORAGE_KEYS) {
       STATE.set(key, 1);
     }
-  }
-  function handle_remove_timer(name) {
-    if (!wait_confirm) {
-      wait_confirm = true;
-      wait_confirm_key = name;
-      return;
-    }
-    if (wait_confirm_key === name) {
-      LOCAL_STORAGE.delete(LOCAL_STATE_KEY_PREFIX + name);
-    }
-  }
-  function cancel_remove_timer() {
-    wait_confirm = false;
-    wait_confirm_key = null;
   }
 
   function make_handler_onchange_hms(component) {
@@ -133,28 +117,6 @@
       /* it seems that svelte delete default event handler, so return something to make scroll-to-change work */
     }}
     oninput={make_handler_onchange_hms(component)} />
-{/snippet}
-
-{#snippet timer_entry(name)}
-  <li class="pad-top">
-    {#if name !== ""}
-      {name}
-    {:else}
-      <i>default</i>
-    {/if}
-    {#if name !== window.location.hash}
-      <button onclick={() => handle_remove_timer(name)}>
-        {#if wait_confirm && name === wait_confirm_key}
-          confirm?
-        {:else}
-          remove
-        {/if}
-      </button>
-      {#if wait_confirm && name === wait_confirm_key}
-        <button onclick={cancel_remove_timer}>cancel</button>
-      {/if}
-    {/if}
-  </li>
 {/snippet}
 
 <div class="settings-wrapper">
@@ -230,7 +192,7 @@
         {#each Object.keys($LOCAL_STORAGE)
           .filter((k) => k.startsWith(LOCAL_STATE_KEY_PREFIX))
           .map( (k) => k.replace(LOCAL_STATE_KEY_PREFIX_REGEX, ""), ) as timer_name (timer_name)}
-          {@render timer_entry(timer_name)}
+          <SettingsTimerEntry name={timer_name} />
         {/each}
       </ul>
     </details>
