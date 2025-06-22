@@ -11,7 +11,12 @@
     start_clockwatch,
   } from "@/lib/clockwatch";
   import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "@/lib/constants";
-  import { MOUSE_IN_WINDOW, SETTINGS_HIDDEN, STATE } from "@/lib/stores";
+  import {
+    HIDE_UI,
+    MOUSE_IN_WINDOW,
+    SETTINGS_HIDDEN,
+    STATE,
+  } from "@/lib/stores";
 </script>
 
 <script>
@@ -69,7 +74,11 @@
     {/if}
   </span>
 
-  <div class="floating" class:hidden={!$MOUSE_IN_WINDOW}>
+  <div
+    class="control-buttons"
+    class:position_right
+    class:hidden={!$MOUSE_IN_WINDOW}
+    class:shift={!$SETTINGS_HIDDEN}>
     <div class="center">
       <button class="icon" onclick={handle_play_pause}>
         {#if $STATE.clockwatch_status === CLOCKWATCH_STATUSES.run}
@@ -105,14 +114,24 @@
       text-align: right;
     }
 
-    & > .floating {
+    & > .control-buttons {
       padding-top: 0.5em;
       padding-bottom: 0.5em;
+      width: 100%;
 
       // using visibility instead of display: none to be able to hover on whole block
       visibility: hidden;
+
+      // shift block when settings opened so it won't be under settings
+      &.shift {
+        max-width: 40vw;
+
+        &.position_right {
+          align-self: end;
+        }
+      }
     }
-    &:hover > .floating {
+    &:hover > .control-buttons {
       visibility: initial;
     }
 
@@ -124,11 +143,13 @@
   :global(.obs) .clockwatch {
     color: white;
   }
-  .position_right {
-    right: 0;
-  }
-  .position_bottom {
-    bottom: 0;
+  .clockwatch {
+    &.position_right {
+      right: 0;
+    }
+    &.position_bottom {
+      bottom: 0;
+    }
   }
   .center {
     margin: auto;
