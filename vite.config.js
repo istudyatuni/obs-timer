@@ -6,7 +6,7 @@ import Icons from "unplugin-icons/vite";
 
 export default defineConfig({
 	plugins: [svelte(), Icons({ compiler: "svelte" })],
-	base: "/simple-timer",
+	base: "/obs-timer",
 	build: {
 		sourcemap: true,
 		rollupOptions: {

@@ -41,7 +41,7 @@
     <div class:hidden={$STATE.hide_help}>
       <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
       <div class="footer" class:hidden={is_in_obs()}>
-        <a href="https://github.com/istudyatuni/simple-timer"
+        <a href="https://github.com/istudyatuni/obs-timer"
           ><GithubIcon width="30" height="30" /></a>
       </div>
     </div>
