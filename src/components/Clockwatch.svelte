@@ -11,12 +11,8 @@
     start_clockwatch,
   } from "@/lib/clockwatch";
   import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "@/lib/constants";
-  import {
-    HIDE_UI,
-    MOUSE_IN_WINDOW,
-    SETTINGS_HIDDEN,
-    STATE,
-  } from "@/lib/stores";
+  import { is_in_obs } from "@/lib/obs";
+  import { MOUSE_IN_WINDOW, SETTINGS_HIDDEN, STATE } from "@/lib/stores";
 </script>
 
 <script>
@@ -77,7 +73,7 @@
   <div
     class="control-buttons"
     class:position_right
-    class:hidden={!$MOUSE_IN_WINDOW}
+    class:hidden={is_in_obs() && !$MOUSE_IN_WINDOW}
     class:shift={!$SETTINGS_HIDDEN}>
     <div class="center">
       <button class="icon" onclick={handle_play_pause}>
