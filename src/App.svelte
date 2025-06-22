@@ -3,8 +3,7 @@
   import Settings from "@/components/Settings.svelte";
   import Tutorial from "./components/Tutorial.svelte";
 
-  import { is_in_obs } from "@/lib/obs";
-  import { migrate_storage, MOUSE_IN_WINDOW } from "@/lib/stores";
+  import { IN_OBS, migrate_storage, MOUSE_IN_WINDOW } from "@/lib/stores";
 </script>
 
 <script>
@@ -20,7 +19,7 @@
   on:hashchange={() => window.location.reload()} />
 <svelte:body onmouseleave={leave} onmouseenter={enter} />
 
-<main class:obs={is_in_obs()}>
+<main class:obs={$IN_OBS}>
   <Settings />
   <Clockwatch />
   <Tutorial />

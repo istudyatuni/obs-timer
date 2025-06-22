@@ -1,4 +1,4 @@
-import { derived, get, writable } from "svelte/store";
+import { derived, get, readable, writable } from "svelte/store";
 
 import { localStore } from "svelte-storages";
 
@@ -63,6 +63,8 @@ export const HIDE_UI = derived(
 	([$mouse_in_window, $state]) =>
 		!$mouse_in_window && $state.auto_hide_settings,
 );
+
+export const IN_OBS = readable(is_in_obs());
 
 export const STORED_TIMERS = derived(LOCAL_STORAGE, ($st) =>
 	Object.keys($st)

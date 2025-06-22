@@ -7,8 +7,13 @@
   import SettingsTimeInput from "@/components/SettingsTimeInput.svelte";
   import SettingsTimerEntry from "@/components/SettingsTimerEntry.svelte";
 
-  import { HIDE_UI, SETTINGS_HIDDEN, STATE, STORED_TIMERS } from "@/lib/stores";
-  import { is_in_obs } from "@/lib/obs";
+  import {
+    HIDE_UI,
+    IN_OBS,
+    SETTINGS_HIDDEN,
+    STATE,
+    STORED_TIMERS,
+  } from "@/lib/stores";
 </script>
 
 <div class="settings-wrapper">
@@ -40,7 +45,7 @@
     </details>
     <div class:hidden={$STATE.hide_help}>
       <p>To create more timers add a hash to the URL: <code>#my-timer</code></p>
-      <div class="footer" class:hidden={is_in_obs()}>
+      <div class="footer" class:hidden={$IN_OBS}>
         <a href="https://github.com/istudyatuni/obs-timer"
           ><GithubIcon width="30" height="30" /></a>
       </div>
