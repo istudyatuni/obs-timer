@@ -69,10 +69,9 @@ export function start_clockwatch() {
 	}
 
 	setInterval(() => {
-		if (get(STATE).clockwatch_status === CLOCKWATCH_STATUSES.pause) {
-			return;
+		let state = get(STATE);
+		if (state.clockwatch_status === CLOCKWATCH_STATUSES.run) {
+			store_hms(state.clockwatch_seconds + 1);
 		}
-
-		store_hms(get(STATE).clockwatch_seconds + 1);
 	}, MS_IN_S);
 }
