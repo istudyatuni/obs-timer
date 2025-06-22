@@ -1,2 +1,7 @@
 $danger: #ff9898;
 $blue: #4da8da;
+$obs-text-color: white;
+
+%obs-color {
+	color: $obs-text-color;
+}

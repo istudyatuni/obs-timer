@@ -93,6 +93,8 @@
 </div>
 
 <style lang="scss">
+  @use "@/colors.scss";
+
   .clockwatch {
     position: absolute;
 
@@ -137,7 +139,7 @@
     }
   }
   :global(.obs) .clockwatch {
-    color: white;
+    @extend %obs-color;
   }
   .clockwatch {
     &.position_right {
