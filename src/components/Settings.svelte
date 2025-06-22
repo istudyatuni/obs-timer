@@ -14,6 +14,7 @@
     STATE,
     STORED_TIMERS,
   } from "@/lib/stores";
+  import { decode_timer_name } from "@/lib/timer";
 </script>
 
 <div class="settings-wrapper">
@@ -33,7 +34,7 @@
       <SettingsClockwatchPosition />
     </details>
     <p class="current-timer">
-      Current timer: {decodeURIComponent(window.location.hash || "default")}
+      Current timer: {decode_timer_name(window.location.hash)}
     </p>
     <details class:hidden={$STORED_TIMERS.length === 1}>
       <summary>Saved timers</summary>
