@@ -38,12 +38,23 @@ export const DEFAULT_STORAGE = {
 	// clockwatch
 };
 
+export const DEFAULT_GLOBAL_STATE = {
+	version: 1,
+
+	tutorial_done: false,
+};
+
 export const PADDING_STORAGE_KEYS = Object.keys(DEFAULT_STORAGE).filter((k) =>
 	k.endsWith("padding_em"),
 );
 
 export const STATE = localStore(LOCAL_STATE_KEY, DEFAULT_STORAGE);
 export const LOCAL_STORAGE = localStorageStore();
+
+export const GLOBAL_STATE = localStore(
+	"obs-timer-global",
+	DEFAULT_GLOBAL_STATE,
+);
 
 export const SETTINGS_HIDDEN = writable(true);
 export const MOUSE_IN_WINDOW = writable(true);
@@ -58,6 +69,10 @@ export const STORED_TIMERS = derived(LOCAL_STORAGE, ($st) =>
 		.filter((k) => k.startsWith(LOCAL_STATE_KEY_PREFIX))
 		.map((k) => k.replace(LOCAL_STATE_KEY_PREFIX_REGEX, "")),
 );
+
+export function set_tutorial_done() {
+	GLOBAL_STATE.set("tutorial_done", true);
+}
 
 export function migrate_storage() {
 	function migrate(store, default_kv) {
@@ -78,6 +93,7 @@ export function migrate_storage() {
 	migrate_clockwatch_to_seconds();
 
 	migrate(STATE, DEFAULT_STORAGE);
+	migrate(GLOBAL_STATE, DEFAULT_GLOBAL_STATE);
 }
 
 function migrate_clockwatch_to_seconds() {

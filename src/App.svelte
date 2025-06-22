@@ -1,6 +1,7 @@
 <script module>
   import Clockwatch from "@/components/Clockwatch.svelte";
   import Settings from "@/components/Settings.svelte";
+  import Tutorial from "./components/Tutorial.svelte";
 
   import { is_in_obs } from "@/lib/obs";
   import { migrate_storage, MOUSE_IN_WINDOW } from "@/lib/stores";
@@ -22,4 +23,5 @@
 <main class:obs={is_in_obs()}>
   <Settings />
   <Clockwatch />
+  <Tutorial />
 </main>

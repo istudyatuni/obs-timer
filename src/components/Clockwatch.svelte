@@ -12,7 +12,12 @@
   } from "@/lib/clockwatch";
   import { CLOCK_POSITIONS, CLOCKWATCH_STATUSES } from "@/lib/constants";
   import { is_in_obs } from "@/lib/obs";
-  import { MOUSE_IN_WINDOW, SETTINGS_HIDDEN, STATE } from "@/lib/stores";
+  import {
+    MOUSE_IN_WINDOW,
+    set_tutorial_done,
+    SETTINGS_HIDDEN,
+    STATE,
+  } from "@/lib/stores";
 </script>
 
 <script>
@@ -52,6 +57,10 @@
     }
     STATE.set("clockwatch_status", status);
   }
+  function toggle_settings() {
+    $SETTINGS_HIDDEN = !$SETTINGS_HIDDEN;
+    set_tutorial_done();
+  }
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -83,9 +92,7 @@
           <PlayIcon />
         {/if}
       </button>
-      <button
-        class="icon"
-        onclick={() => ($SETTINGS_HIDDEN = !$SETTINGS_HIDDEN)}>
+      <button class="icon" onclick={toggle_settings}>
         <SettingsIcon />
       </button>
     </div>
